@@ -1,4 +1,4 @@
-"# RP
+"# RPGAndroidProject" 
 
 nom : Inscription/connexion, authentification par google, suppression de son propre compte, mise en place de travis 
 	date : Lundi 25 mars après-midi ( sur place )
@@ -22,5 +22,5 @@ nom : utilisation de l’api google maps pour afficher 2 entité distinct (les m
 nom : utilisation de l’api google maps pour afficher les donjons et leur interaction
 	date :Vendredi 21 Juin ( sur place)
 	description : création de groupe (quittez le groupe) de joueur pour attaquer un donjon (plusieurs salle, un boss et un trésor à la fin) 
-GAndroidProject" 
+
 
