@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "308633389349",
+    "firebase_url": "https://rpgandroid-5d865.firebaseio.com",
+    "project_id": "rpgandroid-5d865",
+    "storage_bucket": "rpgandroid-5d865.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308633389349:android:0f9a7bfe23c72bd5",
+        "android_client_info": {
+          "package_name": "master.ccm.rpgandroidproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308633389349-v6utu52b5imbgrjsnfngqck71qkh95h5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "master.ccm.rpgandroidproject",
+            "certificate_hash": "d62e36d13e0ac263f9dfb72dea832bfd281bd4e7"
+          }
+        },
+        {
+          "client_id": "308633389349-fl6c16muqqpvrel924fos5n6bo724a9m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5VnMMZFuyr2nvTdDyNJ3F_oven4KWh3A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308633389349-fl6c16muqqpvrel924fos5n6bo724a9m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

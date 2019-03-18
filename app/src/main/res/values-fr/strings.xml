@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RpgAndroidproject</string>
+    <string name="bt_connexion">Connexion</string>
+    <string name="Titre_connexion">Page de Connexion</string>
+    <string name="bt_inscription">Inscription</string>
+    <string name="tb_userName">nom d\'utilisateur</string>
+    <string name="tb_password">mot de passe</string>
+    <string name="Titre_inscription">Inscription</string>
+    <string name="tb_repeatPassword">Confirmer le mot de passe</string>
+    <string name="bt_confirmInscription">confirmer l\'inscription</string>
+    <string name="bt_seConnecter">Se connecter</string>
+</resources>
