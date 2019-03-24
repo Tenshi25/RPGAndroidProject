@@ -35,8 +35,6 @@ public class Inscription extends AppCompatActivity {
         }else{
             return  false;
         }
-
-
     }
 
 
@@ -56,6 +54,7 @@ public class Inscription extends AppCompatActivity {
     public void onClickBouttonInscription(View view) {
         if (verifPassword()){
             Log.i("Tenshi", "Mdp ok !");
+            Toast.makeText(this,"Debut de la procédure d'inscription",Toast.LENGTH_SHORT).show();
             BDDManager bddManager = new BDDManager();
 
             unUtilisateur.setNom(champNom.getText().toString());
@@ -65,6 +64,7 @@ public class Inscription extends AppCompatActivity {
         }
         else{
             Log.i("Tenshi", "Erreur, mdp incorrect");
+            Toast.makeText(this,"ERREUR ! Les deux mot de passe ne sont pas identique",Toast.LENGTH_SHORT).show();
         }
     }
 }
