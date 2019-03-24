@@ -26,7 +26,6 @@ import master.ccm.rpgandroidproject.activite.MainActivity;
 
 public class BDDManager {
     private static FirebaseFirestore database = FirebaseFirestore.getInstance();
-    static int autoIdentifiant;
 
     public void AjouterUtilisateur (Utilisateur unUtilisateur, final Inscription context)
     {
