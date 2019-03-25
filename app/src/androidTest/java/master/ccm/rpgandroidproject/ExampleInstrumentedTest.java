@@ -23,4 +23,8 @@ public class ExampleInstrumentedTest {
 
         assertEquals("master.ccm.rpgandroidproject", appContext.getPackageName());
     }
+    @Test
+    public void monPremierTest() {
+
+    }
 }

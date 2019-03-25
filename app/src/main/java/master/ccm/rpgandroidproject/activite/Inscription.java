@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
 import master.ccm.rpgandroidproject.Entity.Utilisateur;
 import master.ccm.rpgandroidproject.R;
 import master.ccm.rpgandroidproject.manager.BDDManager;
@@ -38,13 +39,29 @@ public class Inscription extends AppCompatActivity {
     }
 
 
-    public void InsertSuccess (String idUtilisateur){
+    public void InsertSuccess (String idUtilisateur, String NomUtilisateur){
         Toast.makeText(this,"L'utilisateur à été inseré dans fireBase",Toast.LENGTH_SHORT).show();
         unUtilisateur.setId(idUtilisateur);
+        //StaticUtilisateurInfo UtilisateurStatic= new StaticUtilisateurInfo();
+        StaticUtilisateurInfo.getInstance().setId(idUtilisateur);
+        StaticUtilisateurInfo.getInstance().setNom(NomUtilisateur);
         Intent monIntent = new Intent (this, MainActivity.class);
         startActivity(monIntent);
 
+
     }
+    public void AfterInsertSuccessOAuth (String idUtilisateur,String NomUtilisateur){
+        StaticUtilisateurInfo.getInstance().setId(idUtilisateur);
+        StaticUtilisateurInfo.getInstance().setNom(NomUtilisateur);
+    }
+    public void InsertSuccessOAuth (String NomUtilisateur){
+        BDDManager bddManager = new BDDManager();
+        Utilisateur UtilisateurOAuth = new Utilisateur();
+        UtilisateurOAuth.setNom(NomUtilisateur);
+        bddManager.AjouterUtilisateurOAuth(UtilisateurOAuth, this);
+    }
+
+
 
     public void onClickBouttonConnexion(View view) {
         Intent monIntent = new Intent (this, MainActivity.class);
@@ -66,5 +83,10 @@ public class Inscription extends AppCompatActivity {
             Log.i("Tenshi", "Erreur, mdp incorrect");
             Toast.makeText(this,"ERREUR ! Les deux mot de passe ne sont pas identique",Toast.LENGTH_SHORT).show();
         }
+    }
+    public void InsertFailNomExist() {
+
+        Toast.makeText(this,"Le nom existe déjà",Toast.LENGTH_SHORT).show();
+
     }
 }

@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
 import master.ccm.rpgandroidproject.Entity.Utilisateur;
 import master.ccm.rpgandroidproject.R;
 import master.ccm.rpgandroidproject.manager.BDDManager;
@@ -56,13 +57,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             bddManager.ConnexionUtilisateur(unUtilisateur, this);
 
     }
-    public void ConnectSucess(String idUtilisateur) {
+    public void ConnectSucess(String idUtilisateur,String nomUtilisateur) {
         unUtilisateur.setId(idUtilisateur);
         Toast.makeText(this,"Vous êtes connecté",Toast.LENGTH_SHORT).show();
+        //StaticUtilisateurInfo UtilisateurStatic= new StaticUtilisateurInfo();
+        StaticUtilisateurInfo.getInstance().setId(idUtilisateur);
+        StaticUtilisateurInfo.getInstance().setNom(nomUtilisateur);
+        Log.i("setInfo", StaticUtilisateurInfo.getInstance().getId());
         Intent monIntent = new Intent (this, pageAccueil.class);
         startActivity(monIntent);
-    }public void onClickGoogleOAuth(View view) {
+    }
+    public void onClickGoogleOAuth(View view) {
         Intent sign = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        Toast.makeText(this,"Debut connexion OAuth",Toast.LENGTH_SHORT).show();
         startActivityForResult(sign, 9025);
     }
     @Override
@@ -73,13 +80,25 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if(result.isSuccess()){
                 GoogleSignInAccount acct = result.getSignInAccount();
+                Toast.makeText(this,"Succès de la connexion OAuth "+acct.getDisplayName(),Toast.LENGTH_SHORT).show();
                 Log.i("Login", acct.getDisplayName());
+                StaticUtilisateurInfo.getInstance().setId(acct.getId());
+                StaticUtilisateurInfo.getInstance().setNom(acct.getDisplayName());
+                Inscription inscription = new Inscription();
+                inscription.InsertSuccessOAuth(acct.getDisplayName());
+                //acct.getFamilyName();
+                Intent monIntent = new Intent (this, pageAccueil.class);
+                startActivity(monIntent);
             }
         }
     }
-
+    public void ConnectionFailed() {
+        Toast.makeText(this,"Echec de la connexion verifier vos identifiants",Toast.LENGTH_SHORT).show();
+    }
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        Toast.makeText(this,"Echec de la connexion verifier vos identifiants",Toast.LENGTH_SHORT).show();
     }
+
+
 }

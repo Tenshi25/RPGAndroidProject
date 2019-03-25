@@ -2,6 +2,8 @@ package master.ccm.rpgandroidproject;
 
 import org.junit.Test;
 
+import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
+
 import static org.junit.Assert.*;
 
 /**
@@ -13,5 +15,14 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
+    }
+    @Test
+    public void SetStaticUtilisateur() throws Exception {
+
+        // set le nom
+        StaticUtilisateurInfo.getInstance().setNom("moi");
+
+        // verification si l'objet à bien engistré la chaîne
+        assertEquals("moi", StaticUtilisateurInfo.getInstance().getNom(), "moi");
     }
 }
