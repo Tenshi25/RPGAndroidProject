@@ -12,8 +12,5 @@ android:
     - extra-android-support
     - extra-android-m2repository
     
-jdk:
-  - oraclejdk8
-  
-before_install:
-  - chmod +x gradlew
+script:
+    - chmod +x ./gradlew
