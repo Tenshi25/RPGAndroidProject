@@ -1,3 +1,5 @@
+language: android
+
 android:
   components:
     # Update Android SDK Tools
