@@ -20,9 +20,9 @@ public class ExampleUnitTest {
     public void SetStaticUtilisateur() throws Exception {
 
         // set le nom
-        StaticUtilisateurInfo.getInstance().setNom("moi");
+        StaticUtilisateurInfo.getInstance().setNom("Test");
 
         // verification si l'objet à bien engistré la chaîne
-        assertEquals("moi", StaticUtilisateurInfo.getInstance().getNom(), "moi");
+        assertEquals("Test", StaticUtilisateurInfo.getInstance().getNom(), "Test");
     }
 }
