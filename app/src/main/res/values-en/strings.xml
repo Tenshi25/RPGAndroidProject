@@ -10,4 +10,6 @@
     <string name="tb_repeatPassword">Repeat the Password</string>
     <string name="bt_confirmInscription">Confirm registration</string>
     <string name="bt_seConnecter">Log in</string>
+    <string name="bt_deco">log out</string>
+    <string name="bt_new_cara">New character</string>
 </resources>

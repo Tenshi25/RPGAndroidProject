@@ -10,4 +10,6 @@
     <string name="tb_repeatPassword">Confirmer le mot de passe</string>
     <string name="bt_confirmInscription">confirmer l\'inscription</string>
     <string name="bt_seConnecter">Se connecter</string>
+    <string name="bt_deco">Déconnexion</string>
+    <string name="bt_new_cara">Nouveau personnage</string>
 </resources>

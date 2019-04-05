@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
@@ -14,6 +17,9 @@ import master.ccm.rpgandroidproject.R;
 
 public class pageAccueil extends AppCompatActivity {
     private TextView untextView;
+    private ListView maListView;
+    private String[] tableauChaines;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +29,19 @@ public class pageAccueil extends AppCompatActivity {
         String chaineBienvenue ="bienvenue : "+StaticUtilisateurInfo.getInstance().getNom();
         //Log.i("setInfo", StaticUtilisateurInfo.getInstance().getNom());
         untextView.setText(chaineBienvenue);
+
+
+        // on s'occupe de la liste view
+
+        maListView = findViewById(R.id.id_maliste);
+
+        //recupéré une ressource
+
+        tableauChaines =getResources().getStringArray(R.array.tableau_de_chaines);
+
+        //adapter fais le lien entre la liste et le tableau de chaine
+        ArrayAdapter<String> monArrayAdapter=new ArrayAdapter(this,R.layout.descripteur_de_ligne,R.id.tv_nom_perso,tableauChaines);
+        maListView.setAdapter(monArrayAdapter);
     }
 
     public void onConnectDisconnect(View view) {
