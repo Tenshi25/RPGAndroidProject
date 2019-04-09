@@ -17,9 +17,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import master.ccm.rpgandroidproject.Entity.Personnage;
 import master.ccm.rpgandroidproject.Entity.Utilisateur;
 import master.ccm.rpgandroidproject.activite.Inscription;
 import master.ccm.rpgandroidproject.activite.MainActivity;
@@ -150,6 +152,24 @@ public class BDDManager {
                 }
             }
         });
+    }}
+        public void selectAllPersonnage(String nomCollection){
+            database.collection(nomCollection).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        ArrayList listPersonnages = new ArrayList();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Personnage unPersonnage = new Personnage();
+                            // il faut ajouter tout les attribut du personnage
+                            Log.d("SelectAll", document.getId() + " => " + document.getData());
+                        }
+                    } else {
+                        Log.w("selectAll", "Error getting documents.", task.getException());
+                    }
+                }
+            });
+        }
         /*
         database.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -163,7 +183,7 @@ public class BDDManager {
                         }
                     }
                 });*/
-    }}
+
 
 
 }

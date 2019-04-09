@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="liste_de_classe"><item>warrior</item><item>mage</item><item>ranger</item></string-array>
+</resources>

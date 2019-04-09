@@ -1,10 +1,10 @@
 package master.ccm.rpgandroidproject.Entity;
 
-public class stats {
+public class Stats {
     private String lib;
     private  int valeur;
 
-    public stats(String lib, int valeur) {
+    public Stats(String lib, int valeur) {
         this.lib = lib;
         this.valeur = valeur;
     }

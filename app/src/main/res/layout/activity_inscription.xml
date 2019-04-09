@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activite.Inscription">
+    tools:context=".activite.Inscription"
+    android:orientation="vertical" android:background="@drawable/backgroud_parchemin">
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="395dp"
-        android:layout_height="414dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteY="48dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,6 +28,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/Titre_inscription"
                 android:textAlignment="center"
+                android:textColor="@color/browser_actions_text_color"
                 android:textSize="24sp" />
 
             <EditText
@@ -71,7 +72,7 @@
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="@android:color/holo_blue_dark"
+                android:backgroundTint="@color/fui_bgEmail"
                 android:onClick="onClickBouttonInscription"
                 android:text="@string/bt_confirmInscription"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"
@@ -84,7 +85,7 @@
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="@android:color/holo_blue_dark"
+                android:backgroundTint="@color/fui_bgEmail"
                 android:onClick="onClickBouttonConnexion"
                 android:text="@string/bt_connexion"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"

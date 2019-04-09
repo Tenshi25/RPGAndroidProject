@@ -17,7 +17,11 @@ import master.ccm.rpgandroidproject.R;
 
 public class pageAccueil extends AppCompatActivity {
     private TextView untextView;
-    private ListView maListView;
+
+
+    // on s'occupe de la liste view
+
+    private ListView maListPersonnage;
     private String[] tableauChaines;
 
     @Override
@@ -29,19 +33,16 @@ public class pageAccueil extends AppCompatActivity {
         String chaineBienvenue ="bienvenue : "+StaticUtilisateurInfo.getInstance().getNom();
         //Log.i("setInfo", StaticUtilisateurInfo.getInstance().getNom());
         untextView.setText(chaineBienvenue);
+        maListPersonnage = (ListView) findViewById(R.id.id_maliste);
 
-
-        // on s'occupe de la liste view
-
-        maListView = findViewById(R.id.id_maliste);
 
         //recupéré une ressource
 
-        tableauChaines =getResources().getStringArray(R.array.tableau_de_chaines);
+        /*tableauChaines =getResources().getStringArray(R.array.tableau_de_chaines);*/
 
         //adapter fais le lien entre la liste et le tableau de chaine
-        ArrayAdapter<String> monArrayAdapter=new ArrayAdapter(this,R.layout.descripteur_de_ligne,R.id.tv_nom_perso,tableauChaines);
-        maListView.setAdapter(monArrayAdapter);
+        /*ArrayAdapter<String> monArrayAdapter=new ArrayAdapter(this,R.layout.descripteur_de_ligne,R.id.tv_nom_perso,tableauChaines);
+        maListView.setAdapter(monArrayAdapter);*/
     }
 
     public void onConnectDisconnect(View view) {
@@ -50,5 +51,10 @@ public class pageAccueil extends AppCompatActivity {
         Intent monIntent = new Intent (this, MainActivity.class);
         startActivity(monIntent);
 
+    }
+
+    public void onClickNouveauPersonnage(View view) {
+        Intent monIntent = new Intent (this, pageAjoutPersonnage.class);
+        startActivity(monIntent);
     }
 }
