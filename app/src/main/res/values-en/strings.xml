@@ -10,4 +10,13 @@
     <string name="tb_repeatPassword">Repeat the Password</string>
     <string name="bt_confirmInscription">Confirm registration</string>
     <string name="bt_seConnecter">Log in</string>
+    <string name="bt_deco">log out</string>
+    <string name="bt_new_cara">New character</string>
+    <string name="Lastname">Lastname</string>
+    <string name="name">name</string>
+    <string name="bt_ajout_personnage">Create character</string>
+    <string name="previous">Previous</string>
+    <string name="Titre_AjoutPersonnage">Character form</string>
+    <string name="bt_CreateNewCharacter">New character</string>
+    <string name="Titre_listePersonnage">select a character</string>
 </resources>

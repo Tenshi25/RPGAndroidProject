@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="tableau_de_chaines">
+        <item>chaine 1</item>
+        <item>chaine 2</item>
+        <item>chaine 3</item>
+        <item>chaine 4</item>
+        <item>chaine 5</item>
+        <item>chaine 6</item>
+        <item>chaine 7</item>
+        <item>chaine 8</item>
+        <item>chaine 9</item>
+        <item>chaine 10</item>
+    </string-array>
+</resources>

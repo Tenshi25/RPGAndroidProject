@@ -10,4 +10,13 @@
     <string name="tb_repeatPassword">Confirmer le mot de passe</string>
     <string name="bt_confirmInscription">confirmer l\'inscription</string>
     <string name="bt_seConnecter">Se connecter</string>
+    <string name="bt_deco">Déconnexion</string>
+    <string name="bt_new_cara">Nouveau personnage</string>
+    <string name="Lastname">nom</string>
+    <string name="name">prenom</string>
+    <string name="bt_ajout_personnage">Créer le personnage</string>
+    <string name="previous">Retour</string>
+    <string name="Titre_AjoutPersonnage">Ajout de personnage</string>
+    <string name="bt_CreateNewCharacter">nouveau personnage</string>
+    <string name="Titre_listePersonnage">select a character</string>
 </resources>

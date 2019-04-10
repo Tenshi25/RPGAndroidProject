@@ -17,19 +17,25 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import master.ccm.rpgandroidproject.Entity.Personnage;
 import master.ccm.rpgandroidproject.Entity.Utilisateur;
 import master.ccm.rpgandroidproject.activite.Inscription;
 import master.ccm.rpgandroidproject.activite.MainActivity;
+import master.ccm.rpgandroidproject.activite.pageAccueil;
+import master.ccm.rpgandroidproject.activite.pageAjoutPersonnage;
 
 public class BDDManager {
     private static FirebaseFirestore database = FirebaseFirestore.getInstance();
     private static boolean utilisateurExist;
+    private static boolean PersonnageExist;
 
-    public static void setUtilisateurExist(boolean utilisateurExist) {
+    private static void setUtilisateurExist(boolean utilisateurExist) {
         BDDManager.utilisateurExist = utilisateurExist;
+
     }
     public void VerifExistUtilisateur (final Utilisateur unUtilisateur, final Inscription context)
     {
@@ -84,7 +90,7 @@ public class BDDManager {
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
-                        if(utilisateurExist==false){
+                        if(!utilisateurExist){
                             Log.i("ajoutUtilisateur","L'utilisateur à été Ajouter");
 
                             context.AfterInsertSuccessOAuth(task.getResult().getId(),unUtilisateur.getNom());
@@ -110,7 +116,7 @@ public class BDDManager {
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
-                        if(utilisateurExist==false){
+                        if(!utilisateurExist){
                             Log.i("ajoutUtilisateur","L'utilisateur à été Ajouter");
 
                             context.InsertSuccess(task.getResult().getId(),unUtilisateur.getNom());
@@ -150,6 +156,86 @@ public class BDDManager {
                 }
             }
         });
+    }}
+        public void selectAllPersonnage(final pageAccueil context){
+            database.collection("Personnage").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        int cpt =0;
+                        ArrayList listPersonnages = new ArrayList();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Personnage unPersonnage = new Personnage();
+                            unPersonnage.setNom(task.getResult().getDocuments().get(cpt).get("nom").toString());
+                            unPersonnage.setNom(task.getResult().getDocuments().get(cpt).get("prenom").toString());
+                            listPersonnages.add(unPersonnage);
+                            // il faut ajouter tout les attribut du personnage
+                            Log.d("SelectAll", document.getId() + " => " + document.getData());
+                            cpt=cpt+1;
+                        }
+                        selectAllPersonnageFini(listPersonnages, context);
+                    } else {
+                        Log.w("selectAll", "Error getting documents.", task.getException());
+                    }
+                }
+            });
+        }
+        public void selectAllPersonnageFini(ArrayList<Personnage> listPersonnages,pageAccueil context){
+           context.RemplirListepersonnage(listPersonnages);
+
+        }
+    public void InsertDatastorePersonnage (final Utilisateur unUtilisateur ,final Personnage unPersonnage, final pageAjoutPersonnage context)
+    {
+        Map<String, Object> PersonnageMap = new HashMap<>();
+        PersonnageMap.put("idUtilisateur", unUtilisateur.getId());
+        PersonnageMap.put("nom", unPersonnage.getNom());
+        PersonnageMap.put("prenom", unPersonnage.getPrenom());
+
+
+        database.collection("Personnage").add(PersonnageMap)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        //a changer
+                        if(!PersonnageExist){
+                            Log.i("ajoutPersonnage","Le Personnage à été Ajouter");
+
+                            context.InsertSuccess();
+                        }
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("ajoutPersonnageErreur","Erreur le personnage n'a pas été ajouter correctement ");
+            }
+        });
+    }
+    //verif Personnage
+    public void VerifPersonnage (final Utilisateur unUtilisateur, final pageAjoutPersonnage context, final Personnage unPersonnage)
+    {
+        PersonnageExist=false;
+        database.collection("Personnage").whereEqualTo("idUtilisateur",unUtilisateur.getId()).whereEqualTo("nom",unPersonnage.getNom()).whereEqualTo("prenom",unPersonnage.getPrenom()).get(Source.DEFAULT).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.getResult().size() >= 1) {
+                    Log.i("task.getResult()",""+task.getResult().size());
+                    Log.i("selectPersonnage","Le personnage existe déjà");
+                    context.InsertFailPersonnageExist();
+                    BDDManager unbddManager = new BDDManager();
+                    unbddManager.setUtilisateurExist(true);
+                    Log.i("PersonnageExist",""+PersonnageExist);
+                }else{
+                    InsertDatastorePersonnage(unUtilisateur,unPersonnage, context);
+                }
+
+            }
+        });
+    }
+    public void AjoutPersonnage(Utilisateur unUtilisateur, final pageAjoutPersonnage context,Personnage unPersonnage){
+        VerifPersonnage(unUtilisateur,context,unPersonnage);
+        //InsertDatastorePersonnage(unUtilisateur,unPersonnage,context);
+    }
         /*
         database.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -163,7 +249,7 @@ public class BDDManager {
                         }
                     }
                 });*/
-    }}
+
 
 
 }
