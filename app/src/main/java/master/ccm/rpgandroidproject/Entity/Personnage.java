@@ -12,7 +12,7 @@ public class Personnage {
     private int niveau;
     private int expNiveauSuivant;
     private String classe;
-    private List<Stats> statistique=new ArrayList<>();
+    private List<Stats> statistique=new ArrayList<Stats>();
 
     public Personnage(String nom, String prenom, int experience, int pv, int pvmax, int niveau, int expNiveauSuivant) {
         this.nom = nom;
@@ -25,45 +25,45 @@ public class Personnage {
     }
     public Personnage(){}
 
-    private String getNom() {
+    public String getNom() {
         return nom;
     }
 
-    private void setNom(String nom) {
+    public void setNom(String nom) {
         this.nom = nom;
     }
 
-    private String getPrenom() {
+    public String getPrenom() {
         return prenom;
     }
 
-    private void setPrenom(String prenom) {
+    public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
-    private int getExperience() {
+    public int getExperience() {
         return experience;
     }
 
-    private void setExperience(int experience) {
+    public void setExperience(int experience) {
         this.experience = experience;
     }
 
-    private int getPv() {
+    public int getPv() {
         return pv;
     }
 
-    private void setPv(int pv) {
+    public void setPv(int pv) {
         this.pv = pv;
     }
-    private int getPvmax() {
+    public int getPvmax() {
         return pvmax;
     }
 
-    private void setPvmax(int pvmax) {
+    public void setPvmax(int pvmax) {
         this.pvmax = pvmax;
     }
-    private void pertePv(int pvDegat){
+    public void pertePv(int pvDegat){
         if (this.pv> 0){
             setPv(this.pv-pvDegat);
         }
@@ -72,7 +72,7 @@ public class Personnage {
         }
     }
 
-    private void gainPv(int pvRegain){
+    public void gainPv(int pvRegain){
         if (this.pv < this.pvmax){
             setPv(this.pv+pvRegain);
         }
@@ -80,7 +80,7 @@ public class Personnage {
             setPv(pvmax);
         }
     }
-    private void gainExp(int exp){
+    public void gainExp(int exp){
         if (this.experience < this.expNiveauSuivant){
             setExperience(this.experience+exp);
         }
@@ -93,19 +93,19 @@ public class Personnage {
     }
 
 
-    private int getNiveau() {
+    public int getNiveau() {
         return niveau;
     }
 
-    private void setNiveau(int niveau) {
+    public void setNiveau(int niveau) {
         this.niveau = niveau;
     }
 
-    private int getExpNiveauSuivant() {
+    public int getExpNiveauSuivant() {
         return expNiveauSuivant;
     }
 
-    private void setExpNiveauSuivant(int expNiveauSuivant) {
+    public void setExpNiveauSuivant(int expNiveauSuivant) {
         this.expNiveauSuivant = expNiveauSuivant;
     }
 }

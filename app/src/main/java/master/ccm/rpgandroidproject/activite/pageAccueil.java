@@ -10,9 +10,17 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import master.ccm.rpgandroidproject.Entity.Personnage;
 import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
 import master.ccm.rpgandroidproject.R;
+import master.ccm.rpgandroidproject.manager.BDDManager;
 
 
 public class pageAccueil extends AppCompatActivity {
@@ -22,6 +30,7 @@ public class pageAccueil extends AppCompatActivity {
     // on s'occupe de la liste view
 
     private ListView maListPersonnage;
+    private List<Personnage>listePersonnage;
     private String[] tableauChaines;
 
     @Override
@@ -33,16 +42,26 @@ public class pageAccueil extends AppCompatActivity {
         String chaineBienvenue ="bienvenue : "+StaticUtilisateurInfo.getInstance().getNom();
         //Log.i("setInfo", StaticUtilisateurInfo.getInstance().getNom());
         untextView.setText(chaineBienvenue);
-        maListPersonnage = (ListView) findViewById(R.id.id_maliste);
-
+        maListPersonnage =  findViewById(R.id.id_maliste);
+        //(ListView)
 
         //recupéré une ressource
 
-        /*tableauChaines =getResources().getStringArray(R.array.tableau_de_chaines);*/
+        BDDManager unBDDManager =  new BDDManager();
+        //listePersonnage =unBDDManager.selectAllPersonnage();
+        //tableauChaines=unBDDManager.selectAllPersonnage();
+
+        //tableauChaines =getResources().getStringArray(R.array.tableau_de_chaines);*/
 
         //adapter fais le lien entre la liste et le tableau de chaine
-        /*ArrayAdapter<String> monArrayAdapter=new ArrayAdapter(this,R.layout.descripteur_de_ligne,R.id.tv_nom_perso,tableauChaines);
-        maListView.setAdapter(monArrayAdapter);*/
+        //ArrayAdapter<String> monArrayAdapter=new ArrayAdapter(this,R.layout.descripteur_de_ligne,R.id.tv_nom_perso,tableauChaines);
+        //maListPersonnage.setAdapter(monArrayAdapter);
+    }
+    public void RemplirListepersonnage(ArrayList<Personnage> p_listePersonnage){
+        listePersonnage =p_listePersonnage;
+        for (Personnage unPersonnage : listePersonnage) {
+            Toast.makeText(this,"nom : "+ unPersonnage.getNom()+" prenom : "+ unPersonnage.getPrenom(),Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void onConnectDisconnect(View view) {

@@ -33,7 +33,7 @@
                 tools:layout_editor_absoluteY="39dp" />
 
             <EditText
-                android:id="@+id/tb_nom"
+                android:id="@+id/tb_nom_perso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -46,7 +46,7 @@
                 tools:layout_editor_absoluteY="131dp" />
 
             <EditText
-                android:id="@+id/tb_prenom"
+                android:id="@+id/tb_prenom_perso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
