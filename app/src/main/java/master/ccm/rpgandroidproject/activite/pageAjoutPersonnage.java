@@ -42,7 +42,14 @@ public class pageAjoutPersonnage extends AppCompatActivity {
         unPersonnage = new Personnage();
         unPersonnage.setNom(champNomPersonnage.getText().toString());
         unPersonnage.setPrenom(champPrenomPersonnage.getText().toString());
-
+        unPersonnage.setNiveau(1);
+        unPersonnage.setExperience(0);
+        unPersonnage.setExpNiveauSuivant(20);
+        unPersonnage.setClasse(listclasse.getSelectedItem().toString());
+        //a remplacer par une fonction qui demande à l'api rest
+        int pvmax = 8;
+        unPersonnage.setPvMax(pvmax);
+        unPersonnage.setPv(pvmax);
         BDDManager leBDDManager =new BDDManager();
         unUtilisateur = new Utilisateur();
         unUtilisateur.setId(StaticUtilisateurInfo.getInstance().getId());

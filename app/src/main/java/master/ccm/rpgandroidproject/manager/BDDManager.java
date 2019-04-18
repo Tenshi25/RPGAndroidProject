@@ -1,14 +1,11 @@
 package master.ccm.rpgandroidproject.manager;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -16,7 +13,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -167,8 +163,22 @@ public class BDDManager {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Personnage unPersonnage = new Personnage();
                             unPersonnage.setNom(task.getResult().getDocuments().get(cpt).get("nom").toString());
-                            unPersonnage.setNom(task.getResult().getDocuments().get(cpt).get("prenom").toString());
+                            unPersonnage.setPrenom(task.getResult().getDocuments().get(cpt).get("prenom").toString());
+                            unPersonnage.setNiveau(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("niveau").toString()));
+                            unPersonnage.setExperience(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("experience").toString()));
+                            unPersonnage.setExpNiveauSuivant(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("expNiveauSuivant").toString()));
+                            unPersonnage.setPv(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("pv").toString()));
+                            unPersonnage.setPvMax(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("pvMax").toString()));
+                            unPersonnage.setClasse(task.getResult().getDocuments().get(cpt).get("classePersonnage").toString());
+
                             listPersonnages.add(unPersonnage);
+
+
+
+
+
+
+                            Log.i("Perso", "Nom :"+ unPersonnage.getPrenom() +"Prenom : "+unPersonnage.getPrenom());
                             // il faut ajouter tout les attribut du personnage
                             Log.d("SelectAll", document.getId() + " => " + document.getData());
                             cpt=cpt+1;
@@ -190,6 +200,12 @@ public class BDDManager {
         PersonnageMap.put("idUtilisateur", unUtilisateur.getId());
         PersonnageMap.put("nom", unPersonnage.getNom());
         PersonnageMap.put("prenom", unPersonnage.getPrenom());
+        PersonnageMap.put("niveau", unPersonnage.getNiveau());
+        PersonnageMap.put("experience", unPersonnage.getExperience());
+        PersonnageMap.put("expNiveauSuivant", unPersonnage.getExpNiveauSuivant());
+        PersonnageMap.put("classePersonnage", unPersonnage.getClasse());
+        PersonnageMap.put("pv", unPersonnage.getPv());
+        PersonnageMap.put("pvMax", unPersonnage.getPvMax());
 
 
         database.collection("Personnage").add(PersonnageMap)

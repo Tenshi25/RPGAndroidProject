@@ -48,7 +48,7 @@ public class pageAccueil extends AppCompatActivity {
         //recupéré une ressource
 
         BDDManager unBDDManager =  new BDDManager();
-        //listePersonnage =unBDDManager.selectAllPersonnage();
+        unBDDManager.selectAllPersonnage(this);
         //tableauChaines=unBDDManager.selectAllPersonnage();
 
         //tableauChaines =getResources().getStringArray(R.array.tableau_de_chaines);*/
