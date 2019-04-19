@@ -37,8 +37,8 @@
 
             <ListView
                 android:id="@+id/id_maliste"
-                android:layout_width="225dp"
-                android:layout_height="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="699dp" />

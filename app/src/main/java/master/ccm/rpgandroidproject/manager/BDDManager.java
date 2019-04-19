@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -158,32 +159,31 @@ public class BDDManager {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful()) {
-                        int cpt =0;
-                        ArrayList listPersonnages = new ArrayList();
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Personnage unPersonnage = new Personnage();
-                            unPersonnage.setNom(task.getResult().getDocuments().get(cpt).get("nom").toString());
-                            unPersonnage.setPrenom(task.getResult().getDocuments().get(cpt).get("prenom").toString());
-                            unPersonnage.setNiveau(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("niveau").toString()));
-                            unPersonnage.setExperience(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("experience").toString()));
-                            unPersonnage.setExpNiveauSuivant(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("expNiveauSuivant").toString()));
-                            unPersonnage.setPv(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("pv").toString()));
-                            unPersonnage.setPvMax(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("pvMax").toString()));
-                            unPersonnage.setClasse(task.getResult().getDocuments().get(cpt).get("classePersonnage").toString());
+                        //if (!task.getResult().isEmpty()) {
 
-                            listPersonnages.add(unPersonnage);
+                            int cpt = 0;
+                            ArrayList<Personnage> listPersonnages = new ArrayList<Personnage>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Personnage unPersonnage = new Personnage();
+                                unPersonnage.setId(task.getResult().getDocuments().get(cpt).getId());
+                                unPersonnage.setNom(task.getResult().getDocuments().get(cpt).get("nom").toString());
+                                unPersonnage.setPrenom(task.getResult().getDocuments().get(cpt).get("prenom").toString());
+                                unPersonnage.setNiveau(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("niveau").toString()));
+                                unPersonnage.setExperience(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("experience").toString()));
+                                unPersonnage.setExpNiveauSuivant(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("expNiveauSuivant").toString()));
+                                unPersonnage.setPv(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("pv").toString()));
+                                unPersonnage.setPvMax(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("pvMax").toString()));
+                                unPersonnage.setClasse(task.getResult().getDocuments().get(cpt).get("classePersonnage").toString());
+
+                                listPersonnages.add(unPersonnage);
+                                Log.i("Perso", "Nom :" + unPersonnage.getPrenom() + "Prenom : " + unPersonnage.getPrenom());
+                                // il faut ajouter tout les attribut du personnage
+                                Log.d("SelectAll", document.getId() + " => " + document.getData());
+                                cpt = cpt + 1;
 
 
-
-
-
-
-                            Log.i("Perso", "Nom :"+ unPersonnage.getPrenom() +"Prenom : "+unPersonnage.getPrenom());
-                            // il faut ajouter tout les attribut du personnage
-                            Log.d("SelectAll", document.getId() + " => " + document.getData());
-                            cpt=cpt+1;
+                            selectAllPersonnageFini(listPersonnages, context);
                         }
-                        selectAllPersonnageFini(listPersonnages, context);
                     } else {
                         Log.w("selectAll", "Error getting documents.", task.getException());
                     }
@@ -252,6 +252,25 @@ public class BDDManager {
         VerifPersonnage(unUtilisateur,context,unPersonnage);
         //InsertDatastorePersonnage(unUtilisateur,unPersonnage,context);
     }
+    public void SupprPersonnage( final pageAccueil context,Personnage unPersonnage){
+        database.collection("Personnage").document(unPersonnage.getId())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("supprPersonnage", "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("supprPersonnage", "Error deleting document", e);
+                    }
+                });
+
+        //InsertDatastorePersonnage(unUtilisateur,unPersonnage,context);
+    }
+
         /*
         database.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

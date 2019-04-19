@@ -5,9 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +34,9 @@ public class pageAccueil extends AppCompatActivity {
 
     private ListView maListPersonnage;
     private List<Personnage>listePersonnage;
-    private String[] tableauChaines;
+    private List<String> tableauChaines = new ArrayList<String>();
+    private Personnage[] test;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +47,7 @@ public class pageAccueil extends AppCompatActivity {
         String chaineBienvenue ="bienvenue : "+StaticUtilisateurInfo.getInstance().getNom();
         //Log.i("setInfo", StaticUtilisateurInfo.getInstance().getNom());
         untextView.setText(chaineBienvenue);
-        maListPersonnage =  findViewById(R.id.id_maliste);
+        maListPersonnage = findViewById(R.id.id_maliste);
         //(ListView)
 
         //recupéré une ressource
@@ -59,12 +64,44 @@ public class pageAccueil extends AppCompatActivity {
     }
     public void RemplirListepersonnage(ArrayList<Personnage> p_listePersonnage){
         listePersonnage =p_listePersonnage;
+        int cpt = 0;
+        test = new Personnage[p_listePersonnage.size()];
+
         for (Personnage unPersonnage : listePersonnage) {
+            test[cpt] = unPersonnage;
+        //    tableauChaines[cpt] = unPersonnage.getNom();
+            cpt++;
+            tableauChaines.add(unPersonnage.getNom());
             Toast.makeText(this,"nom : "+ unPersonnage.getNom()+" prenom : "+ unPersonnage.getPrenom(),Toast.LENGTH_SHORT).show();
         }
+        ArrayAdapter<Personnage> monArrayAdapter = new ArrayAdapter<Personnage>(this, R.layout.descripteur_de_ligne, test){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                Personnage perso = test[position];
+
+                if(convertView == null){
+                    convertView = getLayoutInflater()
+                            .inflate(R.layout.descripteur_de_ligne, null, false);
+                }
+                TextView nomPerso = (TextView) convertView.findViewById(R.id.tv_nom_perso);
+                TextView prenomPerso = (TextView) convertView.findViewById(R.id.tv_niv_perso);
+                ImageButton modifPerso = (ImageButton) convertView.findViewById(R.id.bt_modifPerso);
+                ImageButton SupprPerso = (ImageButton) convertView.findViewById(R.id.bt_supprPerso);
+                nomPerso.setText(perso.getNom());
+                prenomPerso.setText(perso.getPrenom());
+                //
+                return convertView;
+            }
+        };
+        maListPersonnage.setAdapter(monArrayAdapter);
     }
 
     public void onConnectDisconnect(View view) {
+        BDDManager unBDDManager =  new BDDManager();
+        Personnage unPersonnage = new Personnage();
+        unPersonnage.setId("");
+        unBDDManager.SupprPersonnage(this,unPersonnage);
+
         StaticUtilisateurInfo.getInstance().setId(null);
         StaticUtilisateurInfo.getInstance().setNom(null);
         Intent monIntent = new Intent (this, MainActivity.class);

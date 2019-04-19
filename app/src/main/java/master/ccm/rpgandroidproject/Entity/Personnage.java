@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Personnage {
+    private String id;
     private String nom;
     private String prenom;
     private int experience;
@@ -115,5 +116,13 @@ public class Personnage {
 
     public void setClasse(String classe) {
         this.classe = classe;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
