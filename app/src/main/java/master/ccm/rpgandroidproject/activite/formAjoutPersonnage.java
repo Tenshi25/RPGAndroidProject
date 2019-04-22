@@ -14,7 +14,7 @@ import master.ccm.rpgandroidproject.Entity.Utilisateur;
 import master.ccm.rpgandroidproject.R;
 import master.ccm.rpgandroidproject.manager.BDDManager;
 
-public class pageAjoutPersonnage extends AppCompatActivity {
+public class formAjoutPersonnage extends AppCompatActivity {
     private Personnage unPersonnage;
     private EditText champNomPersonnage;
     private EditText champPrenomPersonnage;
@@ -33,7 +33,7 @@ public class pageAjoutPersonnage extends AppCompatActivity {
     }
 
     public void onClickRetour(View view) {
-        Intent monIntent = new Intent (this, pageAccueil.class);
+        Intent monIntent = new Intent (this, pageChoixPerso.class);
         startActivity(monIntent);
     }
 
@@ -60,7 +60,7 @@ public class pageAjoutPersonnage extends AppCompatActivity {
     }
     public void InsertSuccess (){
         Toast.makeText(this,"Le Personnage à été inseré dans fireBase",Toast.LENGTH_SHORT).show();
-        Intent monIntent = new Intent (this, pageAccueil.class);
+        Intent monIntent = new Intent (this, pageChoixPerso.class);
         startActivity(monIntent);
     }
 }

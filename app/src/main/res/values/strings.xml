@@ -13,7 +13,7 @@
     <string name="bt_new_cara">New character</string>
     <string name="Lastname">Lastname</string>
     <string name="name">name</string>
-    <string name="bt_ajout_personnage" >Create character</string>
+    <string name="bt_ajout_personnage">Create character</string>
     <string name="Titre_AjoutPersonnage">Character form</string>
     <string name="previous">Previous</string>
     <string name="bt_CreateNewCharacter">New character</string>

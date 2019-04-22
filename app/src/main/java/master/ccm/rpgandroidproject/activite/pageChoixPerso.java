@@ -6,16 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +21,7 @@ import master.ccm.rpgandroidproject.R;
 import master.ccm.rpgandroidproject.manager.BDDManager;
 
 
-public class pageAccueil extends AppCompatActivity {
+public class pageChoixPerso extends AppCompatActivity {
     private TextView untextView;
 
 
@@ -41,13 +36,13 @@ public class pageAccueil extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_accueil);
+        setContentView(R.layout.activity_page_choix_perso);
         untextView = findViewById(R.id.tv_message);
         //StaticUtilisateurInfo unUtilisateurStatic = new StaticUtilisateurInfo();
         String chaineBienvenue ="bienvenue : "+StaticUtilisateurInfo.getInstance().getNom();
         //Log.i("setInfo", StaticUtilisateurInfo.getInstance().getNom());
         untextView.setText(chaineBienvenue);
-        maListPersonnage = findViewById(R.id.id_maliste);
+        maListPersonnage = findViewById(R.id.id_ListeViewTest);
         //(ListView)
 
         //recupéré une ressource
@@ -63,33 +58,43 @@ public class pageAccueil extends AppCompatActivity {
         //maListPersonnage.setAdapter(monArrayAdapter);
     }
     public void RemplirListepersonnage(ArrayList<Personnage> p_listePersonnage){
+        Log.i("logNomTailleListePerso","taille : "+ p_listePersonnage.size());
         listePersonnage =p_listePersonnage;
         int cpt = 0;
         test = new Personnage[p_listePersonnage.size()];
+        Log.i("logNomTailleTabPerso","taille : "+ test.length);
 
         for (Personnage unPersonnage : listePersonnage) {
             test[cpt] = unPersonnage;
         //    tableauChaines[cpt] = unPersonnage.getNom();
+
+            //tableauChaines.add(unPersonnage.getNom());
+            Log.i("logNomFor",cpt+". nom : "+ unPersonnage.getNom()+" prenom : "+ unPersonnage.getPrenom());
             cpt++;
-            tableauChaines.add(unPersonnage.getNom());
-            Toast.makeText(this,"nom : "+ unPersonnage.getNom()+" prenom : "+ unPersonnage.getPrenom(),Toast.LENGTH_SHORT).show();
         }
-        ArrayAdapter<Personnage> monArrayAdapter = new ArrayAdapter<Personnage>(this, R.layout.descripteur_de_ligne, test){
+
+
+        ArrayAdapter<Personnage> monArrayAdapter = new ArrayAdapter<Personnage>(this, R.layout.descripteur_de_ligne2, test){
+            private int vraiPosition=0;
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
+                Log.i("logNomPos", "pos : "+ position);
+
                 Personnage perso = test[position];
 
                 if(convertView == null){
                     convertView = getLayoutInflater()
-                            .inflate(R.layout.descripteur_de_ligne, null, false);
+                            .inflate(R.layout.descripteur_de_ligne, parent, false);
                 }
                 TextView nomPerso = (TextView) convertView.findViewById(R.id.tv_nom_perso);
                 TextView prenomPerso = (TextView) convertView.findViewById(R.id.tv_niv_perso);
-                ImageButton modifPerso = (ImageButton) convertView.findViewById(R.id.bt_modifPerso);
-                ImageButton SupprPerso = (ImageButton) convertView.findViewById(R.id.bt_supprPerso);
+                //ImageButton modifPerso = (ImageButton) convertView.findViewById(R.id.bt_modifPerso);
+                //ImageButton SupprPerso = (ImageButton) convertView.findViewById(R.id.bt_supprPerso);
                 nomPerso.setText(perso.getNom());
                 prenomPerso.setText(perso.getPrenom());
+                Log.i("logNomPerso","logNomPerso : "+perso.getNom()+" Prenom : "+perso.getPrenom());
                 //
+                vraiPosition++;
                 return convertView;
             }
         };
@@ -110,7 +115,32 @@ public class pageAccueil extends AppCompatActivity {
     }
 
     public void onClickNouveauPersonnage(View view) {
-        Intent monIntent = new Intent (this, pageAjoutPersonnage.class);
+        Intent monIntent = new Intent (this, formAjoutPersonnage.class);
         startActivity(monIntent);
+    }
+
+    public void onClickModification(View view) {
+
+    }
+
+    public void onClickSupprimer(View view) {
+        View parentRow = (View) view.getParent();
+        ListView listView = (ListView) parentRow.getParent();
+        final int position = listView.getPositionForView(parentRow);
+        Toast.makeText(this,"position : " + position ,Toast.LENGTH_SHORT).show();
+        Personnage PersonnageASupprimer = listePersonnage.get(position);
+        Toast.makeText(this,"Personnage à supprimer : id : "+PersonnageASupprimer.getId() +" "+ PersonnageASupprimer.getNom()+ ", "+ PersonnageASupprimer.getPrenom() ,Toast.LENGTH_SHORT).show();
+        BDDManager unBDDManager =  new BDDManager();
+        unBDDManager.SupprPersonnage(this,PersonnageASupprimer);
+        listePersonnage.remove(PersonnageASupprimer);
+        int cpt = 0;
+        test = new Personnage[listePersonnage.size()];
+
+        for (Personnage unPersonnage : listePersonnage) {
+            test[cpt] = unPersonnage;
+            cpt++;
+        }
+
+        //maListPersonnage.invalidateViews();
     }
 }

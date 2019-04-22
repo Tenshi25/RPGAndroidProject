@@ -16,14 +16,15 @@ import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import master.ccm.rpgandroidproject.Entity.Personnage;
 import master.ccm.rpgandroidproject.Entity.Utilisateur;
-import master.ccm.rpgandroidproject.activite.Inscription;
+import master.ccm.rpgandroidproject.activite.formInscription;
 import master.ccm.rpgandroidproject.activite.MainActivity;
-import master.ccm.rpgandroidproject.activite.pageAccueil;
-import master.ccm.rpgandroidproject.activite.pageAjoutPersonnage;
+import master.ccm.rpgandroidproject.activite.pageChoixPerso;
+import master.ccm.rpgandroidproject.activite.formAjoutPersonnage;
 
 public class BDDManager {
     private static FirebaseFirestore database = FirebaseFirestore.getInstance();
@@ -34,7 +35,7 @@ public class BDDManager {
         BDDManager.utilisateurExist = utilisateurExist;
 
     }
-    public void VerifExistUtilisateur (final Utilisateur unUtilisateur, final Inscription context)
+    public void VerifExistUtilisateur (final Utilisateur unUtilisateur, final formInscription context)
     {
         utilisateurExist=false;
         database.collection("Utilisateur").whereEqualTo("nom",unUtilisateur.getNom()).get(Source.DEFAULT).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -56,7 +57,7 @@ public class BDDManager {
 
     }
 
-    public void VerifUtilisateur (final Utilisateur unUtilisateur, final Inscription context)
+    public void VerifUtilisateur (final Utilisateur unUtilisateur, final formInscription context)
     {
         utilisateurExist=false;
         database.collection("Utilisateur").whereEqualTo("nom",unUtilisateur.getNom()).get(Source.DEFAULT).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -76,7 +77,7 @@ public class BDDManager {
             }
         });
     }
-    public void InsertDatastoreUtilisateurOAuth (final Utilisateur unUtilisateur, final Inscription context)
+    public void InsertDatastoreUtilisateurOAuth (final Utilisateur unUtilisateur, final formInscription context)
     {
         Log.i("utilisateurExist2",""+utilisateurExist);
         Map<String, Object> utilisateurMap = new HashMap<>();
@@ -101,7 +102,7 @@ public class BDDManager {
             }
         });
     }
-    public void InsertDatastoreUtilisateur (final Utilisateur unUtilisateur, final Inscription context)
+    public void InsertDatastoreUtilisateur (final Utilisateur unUtilisateur, final formInscription context)
     {
         Log.i("utilisateurExist2",""+utilisateurExist);
         Map<String, Object> utilisateurMap = new HashMap<>();
@@ -127,12 +128,12 @@ public class BDDManager {
             }
         });
     }
-    public void AjouterUtilisateur (Utilisateur unUtilisateur, final Inscription context)
+    public void AjouterUtilisateur (Utilisateur unUtilisateur, final formInscription context)
     {
         VerifUtilisateur ( unUtilisateur,context);
         //Thread.sleep(10000);
     }
-    public void AjouterUtilisateurOAuth (Utilisateur unUtilisateur, final Inscription context)
+    public void AjouterUtilisateurOAuth (Utilisateur unUtilisateur, final formInscription context)
     {
         VerifExistUtilisateur( unUtilisateur,context);
 
@@ -154,47 +155,52 @@ public class BDDManager {
             }
         });
     }}
-        public void selectAllPersonnage(final pageAccueil context){
+        public void selectAllPersonnage(final pageChoixPerso context){
             database.collection("Personnage").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful()) {
                         //if (!task.getResult().isEmpty()) {
 
-                            int cpt = 0;
+//                            int cpt = 0;
                             ArrayList<Personnage> listPersonnages = new ArrayList<Personnage>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
+                            List<DocumentSnapshot> result = task.getResult().getDocuments();
+                            for (DocumentSnapshot document : result) {
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
                                 Personnage unPersonnage = new Personnage();
-                                unPersonnage.setId(task.getResult().getDocuments().get(cpt).getId());
-                                unPersonnage.setNom(task.getResult().getDocuments().get(cpt).get("nom").toString());
-                                unPersonnage.setPrenom(task.getResult().getDocuments().get(cpt).get("prenom").toString());
-                                unPersonnage.setNiveau(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("niveau").toString()));
-                                unPersonnage.setExperience(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("experience").toString()));
-                                unPersonnage.setExpNiveauSuivant(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("expNiveauSuivant").toString()));
-                                unPersonnage.setPv(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("pv").toString()));
-                                unPersonnage.setPvMax(Integer.parseInt(task.getResult().getDocuments().get(cpt).get("pvMax").toString()));
-                                unPersonnage.setClasse(task.getResult().getDocuments().get(cpt).get("classePersonnage").toString());
+//                                unPersonnage.setId(task.getResult().getDocuments().get(cpt).getId());
+                                unPersonnage.setId(document.getId());
+                                unPersonnage.setNom(document.get("nom").toString());
+                                unPersonnage.setPrenom(document.get("prenom").toString());
+                                unPersonnage.setNiveau(Integer.parseInt(document.get("niveau").toString()));
+                                unPersonnage.setExperience(Integer.parseInt(document.get("experience").toString()));
+                                unPersonnage.setExpNiveauSuivant(Integer.parseInt(document.get("expNiveauSuivant").toString()));
+                                unPersonnage.setPv(Integer.parseInt(document.get("pv").toString()));
+                                unPersonnage.setPvMax(Integer.parseInt(document.get("pvMax").toString()));
+                                unPersonnage.setClasse(document.get("classePersonnage").toString());
 
                                 listPersonnages.add(unPersonnage);
-                                Log.i("Perso", "Nom :" + unPersonnage.getPrenom() + "Prenom : " + unPersonnage.getPrenom());
+                                Log.i("logNomPerso", "Nom :" + unPersonnage.getPrenom() + "Prenom : " + unPersonnage.getPrenom());
                                 // il faut ajouter tout les attribut du personnage
-                                Log.d("SelectAll", document.getId() + " => " + document.getData());
-                                cpt = cpt + 1;
+                                Log.d("logNomSelectAll", document.getId() + " => " + document.getData());
+//                                cpt = cpt + 1;
 
 
-                            selectAllPersonnageFini(listPersonnages, context);
                         }
+                        selectAllPersonnageFini(listPersonnages, context);
                     } else {
                         Log.w("selectAll", "Error getting documents.", task.getException());
                     }
                 }
             });
         }
-        public void selectAllPersonnageFini(ArrayList<Personnage> listPersonnages,pageAccueil context){
-           context.RemplirListepersonnage(listPersonnages);
+        public void selectAllPersonnageFini(ArrayList<Personnage> listPersonnages, pageChoixPerso context){
+
+
+            context.RemplirListepersonnage(listPersonnages);
 
         }
-    public void InsertDatastorePersonnage (final Utilisateur unUtilisateur ,final Personnage unPersonnage, final pageAjoutPersonnage context)
+    public void InsertDatastorePersonnage (final Utilisateur unUtilisateur ,final Personnage unPersonnage, final formAjoutPersonnage context)
     {
         Map<String, Object> PersonnageMap = new HashMap<>();
         PersonnageMap.put("idUtilisateur", unUtilisateur.getId());
@@ -228,7 +234,7 @@ public class BDDManager {
         });
     }
     //verif Personnage
-    public void VerifPersonnage (final Utilisateur unUtilisateur, final pageAjoutPersonnage context, final Personnage unPersonnage)
+    public void VerifPersonnage (final Utilisateur unUtilisateur, final formAjoutPersonnage context, final Personnage unPersonnage)
     {
         PersonnageExist=false;
         database.collection("Personnage").whereEqualTo("idUtilisateur",unUtilisateur.getId()).whereEqualTo("nom",unPersonnage.getNom()).whereEqualTo("prenom",unPersonnage.getPrenom()).get(Source.DEFAULT).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -248,11 +254,11 @@ public class BDDManager {
             }
         });
     }
-    public void AjoutPersonnage(Utilisateur unUtilisateur, final pageAjoutPersonnage context,Personnage unPersonnage){
+    public void AjoutPersonnage(Utilisateur unUtilisateur, final formAjoutPersonnage context, Personnage unPersonnage){
         VerifPersonnage(unUtilisateur,context,unPersonnage);
         //InsertDatastorePersonnage(unUtilisateur,unPersonnage,context);
     }
-    public void SupprPersonnage( final pageAccueil context,Personnage unPersonnage){
+    public void SupprPersonnage(final pageChoixPerso context, Personnage unPersonnage){
         database.collection("Personnage").document(unPersonnage.getId())
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

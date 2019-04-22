@@ -19,11 +19,12 @@
         android:layout_height="wrap_content"
         android:text="TextView de droite" />
 
-    <ImageButton
+   <ImageButton
         android:id="@+id/bt_modifPerso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:onClick="onClickModification"
         app:srcCompat="@android:drawable/ic_menu_preferences" />
 
     <ImageButton
@@ -31,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:onClick="onClickSupprimer"
         app:srcCompat="@android:drawable/btn_dialog" />
 
 </LinearLayout>

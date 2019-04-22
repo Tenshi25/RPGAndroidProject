@@ -13,7 +13,7 @@ import master.ccm.rpgandroidproject.Entity.Utilisateur;
 import master.ccm.rpgandroidproject.R;
 import master.ccm.rpgandroidproject.manager.BDDManager;
 
-public class Inscription extends AppCompatActivity {
+public class formInscription extends AppCompatActivity {
     //private EditText champNom,champPassword,champPasswordVerif;
     private EditText champNom;
     private EditText champPassword;
