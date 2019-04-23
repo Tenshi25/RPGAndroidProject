@@ -23,6 +23,7 @@ import master.ccm.rpgandroidproject.Entity.Personnage;
 import master.ccm.rpgandroidproject.Entity.Utilisateur;
 import master.ccm.rpgandroidproject.activite.formInscription;
 import master.ccm.rpgandroidproject.activite.MainActivity;
+import master.ccm.rpgandroidproject.activite.formModifPersonnage;
 import master.ccm.rpgandroidproject.activite.pageChoixPerso;
 import master.ccm.rpgandroidproject.activite.formAjoutPersonnage;
 
@@ -275,6 +276,31 @@ public class BDDManager {
                 });
 
         //InsertDatastorePersonnage(unUtilisateur,unPersonnage,context);
+    }
+    public void ModifPersonnage (final Personnage unPersonnage, final formModifPersonnage context)
+    {
+        Map<String, Object> personnageMap = new HashMap<>();
+        personnageMap.put("nom", unPersonnage.getNom());
+        personnageMap.put("prenom", unPersonnage.getPrenom());
+
+
+        database.collection("Personnage").document(unPersonnage.getId()).update(personnageMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                            Log.i("modifpersonnage","Le personnage à été modifier");
+
+                            context.ModifSucess();
+
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("ModifPersonnage","Erreur le personnage n'a pas été modifier ");
+            }
+        });
     }
 
         /*

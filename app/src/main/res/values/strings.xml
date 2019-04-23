@@ -18,4 +18,6 @@
     <string name="previous">Previous</string>
     <string name="bt_CreateNewCharacter">New character</string>
     <string name="Titre_listePersonnage">select a character</string>
+    <string name="title_activity_form_modif_perso">formModifPerso</string>
+    <string name="bt_Confirmation_modif">Confirm Modification</string>
 </resources>

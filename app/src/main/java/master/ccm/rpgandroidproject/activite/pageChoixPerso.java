@@ -120,7 +120,17 @@ public class pageChoixPerso extends AppCompatActivity {
     }
 
     public void onClickModification(View view) {
+        View parentRow = (View) view.getParent();
+        ListView listView = (ListView) parentRow.getParent();
+        final int position = listView.getPositionForView(parentRow);
+        Toast.makeText(this,"position : " + position ,Toast.LENGTH_SHORT).show();
+        Personnage PersonnageAModif = listePersonnage.get(position);
 
+        Intent monIntent = new Intent (this, formModifPersonnage.class);
+        monIntent.putExtra("idPersonnage",PersonnageAModif.getId());
+        monIntent.putExtra("nomPersonnage",PersonnageAModif.getNom());
+        monIntent.putExtra("prenomPersonnage",PersonnageAModif.getPrenom());
+        startActivity(monIntent);
     }
 
     public void onClickSupprimer(View view) {

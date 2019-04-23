@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activite.testListView"></activity>
+        <activity android:name=".activite.formModifPersonnage"></activity>
+        <activity android:name=".activite.testListView" />
         <activity android:name=".activite.formAjoutPersonnage" />
         <activity android:name=".activite.pageChoixPerso" />
         <activity android:name=".activite.formInscription" />
