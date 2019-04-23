@@ -19,4 +19,5 @@
     <string name="Titre_AjoutPersonnage">Character form</string>
     <string name="bt_CreateNewCharacter">New character</string>
     <string name="Titre_listePersonnage">select a character</string>
+    <string name="bt_Confirmation_modif">Confirm Modification</string>
 </resources>

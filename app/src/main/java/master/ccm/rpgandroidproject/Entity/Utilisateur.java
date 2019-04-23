@@ -6,6 +6,7 @@ public class Utilisateur {
     private String id;
     private String nom;
     private String motDePasse;
+    private Personnage persoCurrent;
 
     public String getId() {
         return id;
@@ -31,4 +32,11 @@ public class Utilisateur {
         this.motDePasse = motDePasse;
     }
 
+    public Personnage getPersoCurrent() {
+        return persoCurrent;
+    }
+
+    public void setPersoCurrent(Personnage persoCurrent) {
+        this.persoCurrent = persoCurrent;
+    }
 }
