@@ -2,9 +2,12 @@ package master.ccm.rpgandroidproject.Entity;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class StaticUtilisateurInfo {
     private String id = "0";
     private String nom = "NULL";
+    private Personnage personnageCourant;
 
     private static StaticUtilisateurInfo sui = null;
 

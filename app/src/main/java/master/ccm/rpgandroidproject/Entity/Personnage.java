@@ -12,8 +12,18 @@ public class Personnage {
     private int pvMax;
     private int niveau;
     private int expNiveauSuivant;
+    private int force;
+    private int dexterite;
+    private int constitution;
+    private int inteligence;
+    private int sagesse;
+    private int charisme;
     private String classe;
-    private List<Stats> statistique=new ArrayList<Stats>();
+    private Item Armeprincipal;
+    private Item Armure;
+    private List<Item>Inventaire;
+
+    //private List<Stats> statistique=new ArrayList<Stats>();
 
     public Personnage(String nom, String prenom, int experience, int pv, int pvmax, int niveau, int expNiveauSuivant) {
         this.nom = nom;
@@ -125,4 +135,84 @@ public class Personnage {
     public void setId(String id) {
         this.id = id;
     }
+
+    public int getForce() {
+        return force;
+    }
+
+    public void setForce(int force) {
+        this.force = force;
+    }
+
+    public int getDexterite() {
+        return dexterite;
+    }
+
+    public void setDexterite(int dexterite) {
+        this.dexterite = dexterite;
+    }
+
+    public int getConstitution() {
+        return constitution;
+    }
+
+    public void setConstitution(int constitution) {
+        this.constitution = constitution;
+    }
+
+    public int getInteligence() {
+        return inteligence;
+    }
+
+    public void setInteligence(int inteligence) {
+        this.inteligence = inteligence;
+    }
+
+    public int getSagesse() {
+        return sagesse;
+    }
+
+    public void setSagesse(int sagesse) {
+        this.sagesse = sagesse;
+    }
+
+    public int getCharisme() {
+        return charisme;
+    }
+
+    public void setCharisme(int charisme) {
+        this.charisme = charisme;
+    }
+
+    public Item getArmeprincipal() {
+        return Armeprincipal;
+    }
+
+    public void setArmeprincipal(Item armeprincipal) {
+        Armeprincipal = armeprincipal;
+    }
+
+    public Item getArmure() {
+        return Armure;
+    }
+
+    public void setArmure(Item armure) {
+        Armure = armure;
+    }
+
+    public List<Item> getInventaire() {
+        return Inventaire;
+    }
+
+    public void setInventaire(List<Item> inventaire) {
+        Inventaire = inventaire;
+    }
+    public void ajoutItemInventaire(Item p_item) {
+        Inventaire.add(p_item);
+    }
+
+    public void supprItemInventaire(Item p_item) {
+        Inventaire.remove(p_item);
+    }
+
 }
