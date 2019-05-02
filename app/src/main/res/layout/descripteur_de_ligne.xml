@@ -8,18 +8,30 @@
 
     <TextView
         android:id="@+id/tv_nom_perso"
-        android:layout_width="180dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView de gauche"
         android:textAlignment="center" />
 
     <TextView
         android:id="@+id/tv_niv_perso"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView de droite" />
 
-   <ImageButton
+    <Button
+        android:id="@+id/bt_jouer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_weight="1"
+        android:background="@drawable/fui_idp_button_background_email"
+        android:onClick="onclickJouer"
+        android:text="Jouer"
+        android:textColor="@color/browser_actions_bg_grey"
+        app:layout_constraintBottom_toTopOf="@+id/bt_Deconnect" />
+
+    <ImageButton
         android:id="@+id/bt_modifPerso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -31,6 +31,7 @@ public class formModifPersonnage extends AppCompatActivity {
     public void onclickRetour(View view) {
         Intent monIntent = new Intent (this, pageChoixPerso.class);
         startActivity(monIntent);
+        finish();
     }
 
     public void onClickConfirmModif(View view) {
@@ -46,6 +47,7 @@ public class formModifPersonnage extends AppCompatActivity {
         Toast.makeText(this,"Le personnage "+champNomModif.getText().toString()+"a été modifier", Toast.LENGTH_SHORT);
         Intent monIntent = new Intent (this, pageChoixPerso.class);
         startActivity(monIntent);
+        finish();
     }
 
 }

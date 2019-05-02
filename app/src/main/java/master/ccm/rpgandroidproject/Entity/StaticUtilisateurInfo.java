@@ -36,4 +36,12 @@ public class StaticUtilisateurInfo {
         this.nom = nom;
         //Log.i("setnom", nom);
     }
+
+    public Personnage getPersonnageCourant() {
+        return personnageCourant;
+    }
+
+    public void setPersonnageCourant(Personnage personnageCourant) {
+        this.personnageCourant = personnageCourant;
+    }
 }

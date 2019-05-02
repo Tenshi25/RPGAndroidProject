@@ -35,6 +35,7 @@ public class formAjoutPersonnage extends AppCompatActivity {
     public void onClickRetour(View view) {
         Intent monIntent = new Intent (this, pageChoixPerso.class);
         startActivity(monIntent);
+        finish();
     }
 
     public void onClickCreerPersonnage(View view) {
@@ -62,5 +63,6 @@ public class formAjoutPersonnage extends AppCompatActivity {
         Toast.makeText(this,"Le Personnage à été inseré dans fireBase",Toast.LENGTH_SHORT).show();
         Intent monIntent = new Intent (this, pageChoixPerso.class);
         startActivity(monIntent);
+        finish();
     }
 }

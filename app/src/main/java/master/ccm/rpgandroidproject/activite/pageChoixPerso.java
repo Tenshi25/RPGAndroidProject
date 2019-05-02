@@ -1,11 +1,13 @@
 package master.ccm.rpgandroidproject.activite;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -31,6 +33,7 @@ public class pageChoixPerso extends AppCompatActivity {
     private List<Personnage>listePersonnage;
     private List<String> tableauChaines = new ArrayList<String>();
     private Personnage[] test;
+    private Personnage personnageSelectionner;
 
 
     @Override
@@ -56,6 +59,16 @@ public class pageChoixPerso extends AppCompatActivity {
         //adapter fais le lien entre la liste et le tableau de chaine
         //ArrayAdapter<String> monArrayAdapter=new ArrayAdapter(this,R.layout.descripteur_de_ligne,R.id.tv_nom_perso,tableauChaines);
         //maListPersonnage.setAdapter(monArrayAdapter);
+        maListPersonnage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                personnageSelectionner = listePersonnage.get(position);
+                maListPersonnage.getChildAt(position).setBackgroundColor(Color.RED);
+                AffichePersonnageClicker(personnageSelectionner);
+
+            }
+
+        });
     }
     public void RemplirListepersonnage(ArrayList<Personnage> p_listePersonnage){
         Log.i("logNomTailleListePerso","taille : "+ p_listePersonnage.size());
@@ -72,7 +85,6 @@ public class pageChoixPerso extends AppCompatActivity {
             Log.i("logNomFor",cpt+". nom : "+ unPersonnage.getNom()+" prenom : "+ unPersonnage.getPrenom());
             cpt++;
         }
-
 
         ArrayAdapter<Personnage> monArrayAdapter = new ArrayAdapter<Personnage>(this, R.layout.descripteur_de_ligne2, test){
             private int vraiPosition=0;
@@ -101,11 +113,14 @@ public class pageChoixPerso extends AppCompatActivity {
         maListPersonnage.setAdapter(monArrayAdapter);
     }
 
+    public void AffichePersonnageClicker(Personnage p_personnage) {
+        Toast.makeText(this,"personnage : " + p_personnage.getNom(),Toast.LENGTH_SHORT).show();
+    }
     public void onConnectDisconnect(View view) {
-        BDDManager unBDDManager =  new BDDManager();
+        /*BDDManager unBDDManager =  new BDDManager();
         Personnage unPersonnage = new Personnage();
         unPersonnage.setId("");
-        unBDDManager.SupprPersonnage(this,unPersonnage);
+        unBDDManager.SupprPersonnage(this,unPersonnage);*/
 
         StaticUtilisateurInfo.getInstance().setId(null);
         StaticUtilisateurInfo.getInstance().setNom(null);
@@ -152,5 +167,17 @@ public class pageChoixPerso extends AppCompatActivity {
         }
 
         //maListPersonnage.invalidateViews();
+    }
+
+    public void onclickJouer(View view) {
+        View parentRow = (View) view.getParent();
+        ListView listView = (ListView) parentRow.getParent();
+        final int position = listView.getPositionForView(parentRow);
+        Toast.makeText(this,"position : " + position ,Toast.LENGTH_SHORT).show();
+        StaticUtilisateurInfo.getInstance().setPersonnageCourant(listePersonnage.get(position)) ;
+        Toast.makeText(this,"Personnage séléctionner : "+listePersonnage.get(position).getId() +" "+ listePersonnage.get(position).getNom()+ ", "+ listePersonnage.get(position).getPrenom() ,Toast.LENGTH_SHORT).show();
+
+        Intent monIntent = new Intent (this, MenuPersonnage.class);
+        startActivity(monIntent);
     }
 }
