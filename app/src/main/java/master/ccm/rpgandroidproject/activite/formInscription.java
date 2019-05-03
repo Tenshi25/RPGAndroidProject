@@ -47,6 +47,7 @@ public class formInscription extends AppCompatActivity {
         StaticUtilisateurInfo.getInstance().setNom(NomUtilisateur);
         Intent monIntent = new Intent (this, MainActivity.class);
         startActivity(monIntent);
+        finish();
 
 
     }
@@ -66,6 +67,7 @@ public class formInscription extends AppCompatActivity {
     public void onClickBouttonConnexion(View view) {
         Intent monIntent = new Intent (this, MainActivity.class);
         startActivity(monIntent);
+        finish();
     }
 
     public void onClickBouttonInscription(View view) {

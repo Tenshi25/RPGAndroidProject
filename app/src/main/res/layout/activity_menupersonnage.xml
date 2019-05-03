@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activite.MenuPersonnage">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_titreMenuPersonnage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <Button
+                android:id="@+id/bt_equipement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClickEquipement"
+                android:text="Equipement" />
+
+            <Button
+                android:id="@+id/bt_inventaire"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClickInventaire"
+                android:text="Inventaire" />
+
+            <Button
+                android:id="@+id/bt_retour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClickMenuPerso"
+                android:text="Retour Liste Personnage" />
+
+            <Button
+                android:id="@+id/bt_quitter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClickQuitter"
+                android:text="Quitter l'application" />
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

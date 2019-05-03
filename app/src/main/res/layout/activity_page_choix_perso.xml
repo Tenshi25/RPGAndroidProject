@@ -53,25 +53,26 @@
                 android:id="@+id/bt_pageCreerPersonnage"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="25dp"
                 android:background="@color/fui_bgEmail"
                 android:onClick="onClickNouveauPersonnage"
                 android:text="@string/bt_CreateNewCharacter"
                 android:textColor="@color/browser_actions_bg_grey"
-                app:layout_constraintBottom_toTopOf="@+id/bt_Deconnect"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintBottom_toTopOf="@+id/bt_jouer"
+                tools:layout_editor_absoluteX="96dp" />
 
             <Button
                 android:id="@+id/bt_Deconnect"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
                 android:background="@drawable/fui_idp_button_background_email"
                 android:onClick="onConnectDisconnect"
                 android:text="@string/bt_deco"
                 android:textColor="@color/browser_actions_bg_grey"
-                tools:layout_editor_absoluteX="96dp"
-                tools:layout_editor_absoluteY="507dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bt_jouer" />
 
         </LinearLayout>
     </ScrollView>

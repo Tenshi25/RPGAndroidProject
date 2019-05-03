@@ -1,5 +1,6 @@
 package master.ccm.rpgandroidproject.manager;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -19,13 +20,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import master.ccm.rpgandroidproject.Entity.Item;
 import master.ccm.rpgandroidproject.Entity.Personnage;
+import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
+import master.ccm.rpgandroidproject.Entity.Stats;
 import master.ccm.rpgandroidproject.Entity.Utilisateur;
+import master.ccm.rpgandroidproject.activite.MenuPersonnage;
 import master.ccm.rpgandroidproject.activite.formInscription;
 import master.ccm.rpgandroidproject.activite.MainActivity;
 import master.ccm.rpgandroidproject.activite.formModifPersonnage;
 import master.ccm.rpgandroidproject.activite.pageChoixPerso;
 import master.ccm.rpgandroidproject.activite.formAjoutPersonnage;
+import master.ccm.rpgandroidproject.activite.page_equipement;
+import master.ccm.rpgandroidproject.activite.page_inventaire;
 
 public class BDDManager {
     private static FirebaseFirestore database = FirebaseFirestore.getInstance();
@@ -317,6 +324,230 @@ public class BDDManager {
                     }
                 });*/
 
+/*-------------------------------------------------------------------------------------------------------------------------*/
+    /*---------------Partie Item ----------------*/
+
+    //récupération de la liste d'item de l'inventaire du personnage
+    //modification  d'un nombre d'item
+    //suppression d'un item de l'inventaire
+    //
+    public void selectAllItem(){
+        database.collection("Item").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    ArrayList<Item> listItems = new ArrayList<Item>();
+                    List<DocumentSnapshot> result = task.getResult().getDocuments();
+                    for (DocumentSnapshot document : result) {
+                        Item unItem = new Item();
+                        unItem.setId(document.getId());
+                        unItem.setNom(document.get("nom").toString());
+                        //recuperation de la stats du joueur
+                        HashMap<String,Integer> mapItemEffet = new HashMap<String,Integer>();
+                        mapItemEffet.put(document.get("stats").toString(),Integer.parseInt(document.get("valeur").toString()));
+                        unItem.setEffet(mapItemEffet);
+                        unItem.setTypeItem(document.get("TypeItem").toString());
+                        listItems.add(unItem);
+                        Log.i("logNomItem", "Item :" + unItem.getNom());
+                        Log.d("logTenshi", document.getId() + " => " + document.getData());
+
+                    }
+                    selectAllItemFini(listItems);
+                } else {
+                    Log.w("selectAll", "Error getting documents.", task.getException());
+                }
+            }
+        });
+    }
+    //récupération de la liste d'item de l'inventaire
+    public void selectAllItemInventaire(final page_inventaire context,Personnage unPersonnage){
+        Log.i("EntrerSelectAllItem",unPersonnage.getId());
+        database.collection("Inventaire").whereEqualTo("idPerso",unPersonnage.getId()).get(Source.DEFAULT).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Log.i("onCompleteSelectAllItem","coucou");
+                if (task.isSuccessful()) {
+//                    ArrayList<Item> listItems = new ArrayList<Item>();
+                    ArrayList<String> listIdItems = new ArrayList<String>();
+                    List<DocumentSnapshot> result = task.getResult().getDocuments();
+                    for (DocumentSnapshot document : result) {
+                        //Item unItem = new Item();
+                        //unItem.setId(document.get("idItem"));
+                        //recuperation de la stats du joueur
+                        Log.i("idItem",""+document.get("idItem"));
+                        listIdItems.add((String) document.get("idItem"));
+                    }
+                    Log.i("SelectAllItemInventaireFini","listIdItem size : "+listIdItems.size());
+                    selectAllItemInventaireFini(listIdItems, context);
+                } else {
+                    Log.w("selectAllInventaireItem", "Error getting documents.", task.getException());
+                }
+            }
+        });
+    }
+    public void selectAllItemInventaireFini(final ArrayList<String> listIdItem, final page_inventaire context){
+        Log.i("SelectAllItemInventaireFini","listIdItem size : "+listIdItem.size());
+        database.collection("Item").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Log.i("onCompleteSelectAllItemInventaireFini","2 eme select");
+                if (task.isSuccessful()) {
+                    ArrayList<Item> listItems = new ArrayList<Item>();
+                    List<DocumentSnapshot> result = task.getResult().getDocuments();
+                    for (DocumentSnapshot document : result) {
+                        for (String unIdItem : listIdItem){
+                            Log.i("unItem","unItem : "+unIdItem);
+                            Log.i("unItem","documentgetIdItem : "+document.getId());
+                            String iddoc =document.getId();
+                            if(unIdItem.equals(iddoc)){
+                                Log.i("unItem","dans le if identique : ");
+                                Item unItem = new Item();
+                                unItem.setId(document.getId());
+                                unItem.setNom(document.get("nom").toString());
+                                //recuperation de la stats du joueur
+                                HashMap<String,Integer> mapItemEffet = new HashMap<String,Integer>();
+                                mapItemEffet.put(document.get("Stats").toString(),Integer.parseInt(document.get("valeur").toString()));
+                                unItem.setEffet(mapItemEffet);
+                                unItem.setTypeItem(document.get("TypeItem").toString());
+                                listItems.add(unItem);
+                                Log.i("logNomItem", "Item :" + unItem.getNom());
+                                Log.d("logTenshiItem", document.getId() + " => " + document.getData());
+                                break;
+                            }
+                        }
+                    }
+                    context.RemplirListeItem(listItems);
+
+                } else {
+                    Log.w("selectAll", "Error getting documents.", task.getException());
+                }
+            }
+        });
 
 
+    }
+    public void selectAllItemFini(ArrayList<Item> listItem){
+
+        StaticUtilisateurInfo.getInstance().setListeItemBase(listItem);
+
+    }
+
+
+
+
+
+    public void SupprItemObjet(final Context context, Personnage unPersonnage, Item unItem ){
+        database.collection("Inventaire").document(unItem.getId())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("supprPersonnage", "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("supprPersonnage", "Error deleting document", e);
+                    }
+                });
+
+        //InsertDatastorePersonnage(unUtilisateur,unPersonnage,context);
+    }
+    public void ModifitemObject (final Context context,int nombreActuel,Item unItem )
+    {
+        HashMap<String, Object> itemMap = new HashMap<>();
+        itemMap.put("quantite", unItem.getQuantite());
+
+
+        database.collection("Inventaire").document(unItem.getId()).update(itemMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        Log.i("modifItem","Le nombre d'item à été modifier");
+                        switch (context.getClass().toString()){
+                            case "page_equipement":
+                                ((page_equipement) context).ModifSucess();
+                                break;
+
+                            case "page_inventaire":
+                                ((page_inventaire) context).ModifSucess();
+                                break;
+
+                            default: Log.i("logSwitch",context.getClass().toString());
+
+                        }
+
+
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("ModifItem","Erreur le nombre d'item n'a pas été modifier ");
+            }
+        });
+    }
+    public void InsertitemInventaire (final Personnage unPersonnage,Item unItem, final Context context)
+    {
+
+        Map<String, Object> itemMap = new HashMap<>();
+        Map<String, Object> itemEffet = new HashMap<>();
+        itemMap.put("idPersonnage", unPersonnage.getId());
+        itemMap.put("nom", unItem.getNom());
+        itemMap.put("TypeItem", unItem.getTypeItem());
+        itemMap.put("quantite", unItem.getQuantite());
+
+        // à finir
+        //itemMap.put("valeur", );
+
+
+
+        database.collection("Inventaire").add(itemMap)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                            Log.i("ajoutItem","L'item à été Ajouter");
+//
+                            //context.InsertSuccess();
+                        }
+
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("ajoutItemErreur","Erreur l'item n'a pas été ajouter correctement ");
+            }
+        });
+    }
+
+    public void SupprItemInventaire(final page_inventaire page_inventaire, Item itemASupprimer) {
+        database.collection("Inventaire").whereEqualTo("idItem",itemASupprimer.getId()).whereEqualTo("idPerso",StaticUtilisateurInfo.getInstance().getPersonnageCourant().getId())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        List<DocumentSnapshot> result = task.getResult().getDocuments();
+                        String idItemASuppr = result.get(0).getId();
+                        deleteItem(page_inventaire, idItemASuppr);
+                        }});
+    }
+
+    private void deleteItem(final page_inventaire page_inventaire, String idItemASuppr) {
+        database.collection("Inventaire").document(idItemASuppr)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("supprPersonnage", "DocumentSnapshot successfully deleted!");
+                        page_inventaire.refresh();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("supprPersonnage", "Error deleting document", e);
+                    }
+                });
+    }
 }
