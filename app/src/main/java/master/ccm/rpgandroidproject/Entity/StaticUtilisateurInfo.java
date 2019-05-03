@@ -8,6 +8,7 @@ public class StaticUtilisateurInfo {
     private String id = "0";
     private String nom = "NULL";
     private Personnage personnageCourant;
+    private ArrayList<Item> listeItemBase=new ArrayList<>();
 
     private static StaticUtilisateurInfo sui = null;
 
@@ -43,5 +44,13 @@ public class StaticUtilisateurInfo {
 
     public void setPersonnageCourant(Personnage personnageCourant) {
         this.personnageCourant = personnageCourant;
+    }
+
+    public ArrayList<Item> getListeItemBase() {
+        return listeItemBase;
+    }
+
+    public void setListeItemBase(ArrayList<Item> listeItemBase) {
+        this.listeItemBase = listeItemBase;
     }
 }

@@ -22,6 +22,7 @@ import java.util.Map;
 
 import master.ccm.rpgandroidproject.Entity.Item;
 import master.ccm.rpgandroidproject.Entity.Personnage;
+import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
 import master.ccm.rpgandroidproject.Entity.Stats;
 import master.ccm.rpgandroidproject.Entity.Utilisateur;
 import master.ccm.rpgandroidproject.activite.MenuPersonnage;
@@ -330,9 +331,7 @@ public class BDDManager {
     //modification  d'un nombre d'item
     //suppression d'un item de l'inventaire
     //
-
-    //récupération de la liste d'item
-    public void selectAllItem(final page_inventaire context){
+    public void selectAllItem(){
         database.collection("Item").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -353,17 +352,83 @@ public class BDDManager {
                         Log.d("logTenshi", document.getId() + " => " + document.getData());
 
                     }
-                    selectAllItemFini(listItems, context);
+                    selectAllItemFini(listItems);
                 } else {
                     Log.w("selectAll", "Error getting documents.", task.getException());
                 }
             }
         });
     }
-    public void selectAllItemFini(ArrayList<Item> listItem, page_inventaire context){
+    //récupération de la liste d'item de l'inventaire
+    public void selectAllItemInventaire(final page_inventaire context,Personnage unPersonnage){
+        Log.i("EntrerSelectAllItem",unPersonnage.getId());
+        database.collection("Inventaire").whereEqualTo("idPerso",unPersonnage.getId()).get(Source.DEFAULT).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Log.i("onCompleteSelectAllItem","coucou");
+                if (task.isSuccessful()) {
+//                    ArrayList<Item> listItems = new ArrayList<Item>();
+                    ArrayList<String> listIdItems = new ArrayList<String>();
+                    List<DocumentSnapshot> result = task.getResult().getDocuments();
+                    for (DocumentSnapshot document : result) {
+                        //Item unItem = new Item();
+                        //unItem.setId(document.get("idItem"));
+                        //recuperation de la stats du joueur
+                        Log.i("idItem",""+document.get("idItem"));
+                        listIdItems.add((String) document.get("idItem"));
+                    }
+                    Log.i("SelectAllItemInventaireFini","listIdItem size : "+listIdItems.size());
+                    selectAllItemInventaireFini(listIdItems, context);
+                } else {
+                    Log.w("selectAllInventaireItem", "Error getting documents.", task.getException());
+                }
+            }
+        });
+    }
+    public void selectAllItemInventaireFini(final ArrayList<String> listIdItem, final page_inventaire context){
+        Log.i("SelectAllItemInventaireFini","listIdItem size : "+listIdItem.size());
+        database.collection("Item").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Log.i("onCompleteSelectAllItemInventaireFini","2 eme select");
+                if (task.isSuccessful()) {
+                    ArrayList<Item> listItems = new ArrayList<Item>();
+                    List<DocumentSnapshot> result = task.getResult().getDocuments();
+                    for (DocumentSnapshot document : result) {
+                        for (String unIdItem : listIdItem){
+                            Log.i("unItem","unItem : "+unIdItem);
+                            Log.i("unItem","documentgetIdItem : "+document.getId());
+                            String iddoc =document.getId();
+                            if(unIdItem.equals(iddoc)){
+                                Log.i("unItem","dans le if identique : ");
+                                Item unItem = new Item();
+                                unItem.setId(document.getId());
+                                unItem.setNom(document.get("nom").toString());
+                                //recuperation de la stats du joueur
+                                HashMap<String,Integer> mapItemEffet = new HashMap<String,Integer>();
+                                mapItemEffet.put(document.get("Stats").toString(),Integer.parseInt(document.get("valeur").toString()));
+                                unItem.setEffet(mapItemEffet);
+                                unItem.setTypeItem(document.get("TypeItem").toString());
+                                listItems.add(unItem);
+                                Log.i("logNomItem", "Item :" + unItem.getNom());
+                                Log.d("logTenshiItem", document.getId() + " => " + document.getData());
+                                break;
+                            }
+                        }
+                    }
+                    context.RemplirListeItem(listItems);
+
+                } else {
+                    Log.w("selectAll", "Error getting documents.", task.getException());
+                }
+            }
+        });
 
 
-        context.RemplirListeItem(listItem);
+    }
+    public void selectAllItemFini(ArrayList<Item> listItem){
+
+        StaticUtilisateurInfo.getInstance().setListeItemBase(listItem);
 
     }
 
@@ -457,4 +522,32 @@ public class BDDManager {
         });
     }
 
+    public void SupprItemInventaire(final page_inventaire page_inventaire, Item itemASupprimer) {
+        database.collection("Inventaire").whereEqualTo("idItem",itemASupprimer.getId()).whereEqualTo("idPerso",StaticUtilisateurInfo.getInstance().getPersonnageCourant().getId())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        List<DocumentSnapshot> result = task.getResult().getDocuments();
+                        String idItemASuppr = result.get(0).getId();
+                        deleteItem(page_inventaire, idItemASuppr);
+                        }});
+    }
+
+    private void deleteItem(final page_inventaire page_inventaire, String idItemASuppr) {
+        database.collection("Inventaire").document(idItemASuppr)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("supprPersonnage", "DocumentSnapshot successfully deleted!");
+                        page_inventaire.refresh();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("supprPersonnage", "Error deleting document", e);
+                    }
+                });
+    }
 }
