@@ -20,4 +20,6 @@
     <string name="Titre_listePersonnage">select a character</string>
     <string name="title_activity_form_modif_perso">formModifPerso</string>
     <string name="bt_Confirmation_modif">Confirm Modification</string>
+    <string name="title_activity_maps_activite">Map</string>
+    <string name="bt_map" >Map</string>
 </resources>

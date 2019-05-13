@@ -38,6 +38,13 @@
                 android:text="Inventaire" />
 
             <Button
+                android:id="@+id/id_map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClickMap"
+                android:text="@string/bt_map" />
+
+            <Button
                 android:id="@+id/bt_retour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

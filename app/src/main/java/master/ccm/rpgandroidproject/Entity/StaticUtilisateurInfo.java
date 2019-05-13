@@ -9,6 +9,7 @@ public class StaticUtilisateurInfo {
     private String nom = "NULL";
     private Personnage personnageCourant;
     private ArrayList<Item> listeItemBase=new ArrayList<>();
+    private Location Coordonnes;
 
     private static StaticUtilisateurInfo sui = null;
 
@@ -52,5 +53,13 @@ public class StaticUtilisateurInfo {
 
     public void setListeItemBase(ArrayList<Item> listeItemBase) {
         this.listeItemBase = listeItemBase;
+    }
+
+    public Location getCoordonnes() {
+        return Coordonnes;
+    }
+
+    public void setCoordonnes(Location coordonnes) {
+        Coordonnes = coordonnes;
     }
 }

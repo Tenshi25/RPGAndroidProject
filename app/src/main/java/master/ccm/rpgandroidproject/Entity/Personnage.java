@@ -95,11 +95,9 @@ public class Personnage {
         if (this.experience < this.expNiveauSuivant){
             setExperience(this.experience+exp);
         }
-        if (this.experience>expNiveauSuivant){
+        if (this.experience >= expNiveauSuivant){
             setExperience(this.experience-this.expNiveauSuivant);
             setNiveau(this.niveau+1);
-
-
         }
     }
 

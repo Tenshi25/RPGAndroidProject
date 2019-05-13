@@ -20,4 +20,7 @@
     <string name="bt_CreateNewCharacter">nouveau personnage</string>
     <string name="Titre_listePersonnage">select a character</string>
     <string name="bt_Confirmation_modif">Confirm Modification</string>
+    <string name="title_activity_form_modif_perso">Formulaire de modification de personnage</string>
+    <string name="title_activity_maps_activite">Carte monde</string>
+    <string name="bt_map">Carte monde</string>
 </resources>
