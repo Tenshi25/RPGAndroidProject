@@ -9,7 +9,7 @@ public class StaticUtilisateurInfo {
     private String nom = "NULL";
     private Personnage personnageCourant;
     private ArrayList<Item> listeItemBase=new ArrayList<>();
-    private Location Coordonnes;
+    private Location Coordonnes = new Location();
 
     private static StaticUtilisateurInfo sui = null;
 

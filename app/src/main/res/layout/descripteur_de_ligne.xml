@@ -8,20 +8,20 @@
 
     <TextView
         android:id="@+id/tv_nom_perso"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="TextView de gauche"
         android:textAlignment="center" />
 
     <TextView
         android:id="@+id/tv_niv_perso"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="TextView de droite" />
 
     <Button
         android:id="@+id/bt_jouer"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
         android:layout_weight="1"
@@ -33,7 +33,7 @@
 
     <ImageButton
         android:id="@+id/bt_modifPerso"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:onClick="onClickModification"
@@ -41,7 +41,7 @@
 
     <ImageButton
         android:id="@+id/bt_supprPerso"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:onClick="onClickSupprimer"

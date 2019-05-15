@@ -1,7 +1,9 @@
 package master.ccm.rpgandroidproject.activite;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -9,7 +11,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.common.collect.MapMaker;
 
+import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
 import master.ccm.rpgandroidproject.R;
 
 public class maps_activite extends FragmentActivity implements OnMapReadyCallback {
@@ -24,6 +28,9 @@ public class maps_activite extends FragmentActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        ServiceSuiviGeo.setActiviteMap(this);
+        startService(new Intent(this, ServiceSuiviGeo.class));
     }
 
 
@@ -39,12 +46,20 @@ public class maps_activite extends FragmentActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(18));
 
+    }
+    public void MiseAJourCoordonnes() {
+        mMap.clear();
+        Toast.makeText(this,"lol j'ai bougé",Toast.LENGTH_LONG).show();
         // Add a marker in Sydney and move the camera
-        /*LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
+        LatLng maPosition = new LatLng(StaticUtilisateurInfo.getInstance().getCoordonnes().getLatitude(), StaticUtilisateurInfo.getInstance().getCoordonnes().getLongitude());
+        MarkerOptions maPositionMarker =new MarkerOptions().position(maPosition).title("Me");
+        //maPositionMarker.
+        //mMap.setOnMarkerClickListener(this);
+        mMap.addMarker(maPositionMarker);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(maPosition));
 
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(16));
+
     }
 }
