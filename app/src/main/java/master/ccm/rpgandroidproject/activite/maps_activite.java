@@ -1,18 +1,24 @@
 package master.ccm.rpgandroidproject.activite;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.common.collect.MapMaker;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
 import master.ccm.rpgandroidproject.R;
@@ -20,6 +26,8 @@ import master.ccm.rpgandroidproject.R;
 public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener,OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private List<MarkerOptions> listeFeuCamp = new ArrayList<MarkerOptions>();
+    private List<MarkerOptions> listeMonstre = new ArrayList<MarkerOptions>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +72,23 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
         mMap.setOnInfoWindowClickListener(this);
 
 
+        //création de monstre
+
+        LatLng positionMonstre = new LatLng( 49.56525,3.609373);
+        MarkerOptions monstreMarker =new MarkerOptions().position(positionMonstre).title("monstre");
+        monstreMarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.icone_monstre2) );
+        listeMonstre.add(monstreMarker);
+
+        mMap.addMarker(monstreMarker);
+        //création de feu de camp
+
+        LatLng positionCamp = new LatLng( 49.56535,3.609383);
+        MarkerOptions feuCampMarker =new MarkerOptions().position(positionCamp).title("Campement");
+        feuCampMarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.icone_feu_camp2) );
+        listeFeuCamp.add(feuCampMarker);
+
+        mMap.addMarker(feuCampMarker);
+
     }
     @Override
     public void onInfoWindowClick(Marker marker) {
@@ -73,8 +98,16 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        Toast.makeText(this, "j'ai cliker sur un marquer",
-                Toast.LENGTH_SHORT).show();
+        if(listeMonstre.contains(marker)){
+            Toast.makeText(this, "j'ai cliker sur un monstre",
+                    Toast.LENGTH_SHORT).show();
+
+        }
+        if(listeFeuCamp.contains(marker)){
+            Toast.makeText(this, "j'ai cliker sur un Feu de camp",
+                    Toast.LENGTH_SHORT).show();
+
+        }
         return true;
     }
 }
