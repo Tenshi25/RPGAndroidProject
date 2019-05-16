@@ -10,13 +10,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.common.collect.MapMaker;
 
 import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
 import master.ccm.rpgandroidproject.R;
 
-public class maps_activite extends FragmentActivity implements OnMapReadyCallback {
+public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener,OnMapReadyCallback {
 
     private GoogleMap mMap;
 
@@ -56,10 +57,24 @@ public class maps_activite extends FragmentActivity implements OnMapReadyCallbac
         LatLng maPosition = new LatLng(StaticUtilisateurInfo.getInstance().getCoordonnes().getLatitude(), StaticUtilisateurInfo.getInstance().getCoordonnes().getLongitude());
         MarkerOptions maPositionMarker =new MarkerOptions().position(maPosition).title("Me");
         //maPositionMarker.
-        //mMap.setOnMarkerClickListener(this);
+        mMap.setOnMarkerClickListener(this);
         mMap.addMarker(maPositionMarker);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(maPosition));
 
+        mMap.setOnInfoWindowClickListener(this);
 
+
+    }
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Toast.makeText(this, "Info window clicked",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        Toast.makeText(this, "j'ai cliker sur un marquer",
+                Toast.LENGTH_SHORT).show();
+        return true;
     }
 }
