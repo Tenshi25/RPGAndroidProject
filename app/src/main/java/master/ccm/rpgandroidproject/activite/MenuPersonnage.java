@@ -46,4 +46,9 @@ public class MenuPersonnage extends AppCompatActivity {
         startActivity(monIntent);
         finish();
     }
+
+    public void onClickMap(View view) {
+        Intent monIntent = new Intent (this, maps_activite.class);
+        startActivity(monIntent);
+    }
 }

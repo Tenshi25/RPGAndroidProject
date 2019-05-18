@@ -21,11 +21,12 @@ public class Personnage {
     private String classe;
     private Item Armeprincipal;
     private Item Armure;
+    private int or;
     private List<Item>Inventaire;
 
     //private List<Stats> statistique=new ArrayList<Stats>();
 
-    public Personnage(String nom, String prenom, int experience, int pv, int pvmax, int niveau, int expNiveauSuivant) {
+    public Personnage(String nom, String prenom, int experience, int pv, int pvmax, int niveau, int expNiveauSuivant,int or) {
         this.nom = nom;
         this.prenom = prenom;
         this.experience = experience;
@@ -33,6 +34,7 @@ public class Personnage {
         this.pvMax = pvmax;
         this.niveau = niveau;
         this.expNiveauSuivant = expNiveauSuivant;
+        this.or =or;
     }
     public Personnage(){}
 
@@ -75,10 +77,9 @@ public class Personnage {
         this.pvMax = pvMax;
     }
     public void pertePv(int pvDegat){
-        if (this.pv> 0){
-            setPv(this.pv-pvDegat);
-        }
-        if (this.pv<=0){
+        if (this.pv>= pvDegat) {
+            setPv(this.pv - pvDegat);
+        }else{
             setPv(0);
         }
     }
@@ -95,13 +96,24 @@ public class Personnage {
         if (this.experience < this.expNiveauSuivant){
             setExperience(this.experience+exp);
         }
-        if (this.experience>expNiveauSuivant){
+        if (this.experience >= expNiveauSuivant){
             setExperience(this.experience-this.expNiveauSuivant);
             setNiveau(this.niveau+1);
-
-
         }
     }
+    public boolean perteOr(int montantOr){
+        if (this.or >= montantOr){
+            setOr(this.or - montantOr);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public void gainOr(int montantOr){
+        setOr(this.or + montantOr);
+    }
+
+
 
 
     public int getNiveau() {
@@ -215,4 +227,11 @@ public class Personnage {
         Inventaire.remove(p_item);
     }
 
+    public int getOr() {
+        return or;
+    }
+
+    public void setOr(int or) {
+        this.or = or;
+    }
 }

@@ -20,4 +20,11 @@
     <string name="Titre_listePersonnage">select a character</string>
     <string name="title_activity_form_modif_perso">formModifPerso</string>
     <string name="bt_Confirmation_modif">Confirm Modification</string>
+    <string name="title_activity_maps_activite">Map</string>
+    <string name="bt_map">Map</string>
+    <string name="bt_ReposCourt">Repos court</string>
+    <string name="bt_reposLong" >Repos Long</string>
+    <string name="tv_tavern" >Your are in a tavern</string>
+    <string name="bt_attaquer">Attaquer</string>
+    <string name="bt_Fuir">Fuir</string>
 </resources>

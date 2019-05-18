@@ -186,6 +186,7 @@ public class BDDManager {
                                 unPersonnage.setPv(Integer.parseInt(document.get("pv").toString()));
                                 unPersonnage.setPvMax(Integer.parseInt(document.get("pvMax").toString()));
                                 unPersonnage.setClasse(document.get("classePersonnage").toString());
+                                unPersonnage.setOr(Integer.parseInt(document.get("or").toString()));
 
                                 listPersonnages.add(unPersonnage);
                                 Log.i("logNomPerso", "Nom :" + unPersonnage.getPrenom() + "Prenom : " + unPersonnage.getPrenom());
@@ -220,6 +221,7 @@ public class BDDManager {
         PersonnageMap.put("classePersonnage", unPersonnage.getClasse());
         PersonnageMap.put("pv", unPersonnage.getPv());
         PersonnageMap.put("pvMax", unPersonnage.getPvMax());
+        PersonnageMap.put("or", unPersonnage.getOr());
 
 
         database.collection("Personnage").add(PersonnageMap)

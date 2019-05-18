@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/taverne"
+    tools:context=".activite.taverne_activite">
+
+    <ScrollView
+        android:id="@+id/scrollView6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_taverne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="@color/browser_actions_bg_grey"
+                android:textSize="24sp"
+                tools:text="@string/tv_tavern" />
+
+            <Button
+                android:id="@+id/bt_reposCourt"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/fui_idp_button_background_email"
+                android:onClick="onClickReposCourt"
+                android:text="@string/bt_ReposCourt"
+                android:textColor="@color/browser_actions_bg_grey"
+                app:layout_constraintBottom_toTopOf="@+id/bt_reposLong"
+                tools:layout_editor_absoluteX="171dp" />
+
+            <Button
+                android:id="@+id/bt_reposLong"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/fui_idp_button_background_email"
+                android:onClick="onClickReposLong"
+                android:text="@string/bt_reposLong"
+                android:textColor="@color/browser_actions_bg_grey"
+                tools:layout_editor_absoluteX="171dp"
+                tools:layout_editor_absoluteY="163dp" />
+
+            <Button
+                android:id="@+id/bt_retour"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/fui_idp_button_background_email"
+                android:onClick="onClickRetour"
+                android:text="@string/previous"
+                android:textColor="@color/browser_actions_bg_grey"
+                app:layout_constraintTop_toBottomOf="@+id/bt_reposLong"
+                tools:layout_editor_absoluteX="171dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
