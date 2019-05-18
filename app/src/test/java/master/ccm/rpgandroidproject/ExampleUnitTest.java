@@ -77,4 +77,50 @@ public class ExampleUnitTest {
         // verification si l'objet à bien engistré la chaîne
         assertEquals("TestGainExp2", ExpExpected, unPersonnage.getExperience());
     }
+    @Test
+    public void testGainor() throws Exception {
+
+        Personnage unPersonnage = new Personnage();
+        int montantDepart = 20;
+        unPersonnage.setOr(montantDepart);
+
+        int montantGain = 100;
+        unPersonnage.gainOr(montantGain);
+        // verification si l'objet à bien engistré la chaîne
+        assertEquals("TestGainExp", montantGain+montantDepart, unPersonnage.getOr());
+    }
+    @Test
+    public void testPerteOrPetite() throws Exception {
+
+        Personnage unPersonnage = new Personnage();
+        int montantDepart = 20;
+        unPersonnage.setOr(montantDepart);
+
+        int montantPerte = 10;
+        unPersonnage.perteOr(montantPerte);
+        // verification si l'objet à bien engistré la chaîne
+        assertEquals("TestPerteOrPetite", montantDepart-montantPerte, unPersonnage.getOr());
+    }
+    @Test
+    public void testPerteOrBoolean() throws Exception {
+
+        Random rand = new Random();
+
+        // Obtain a number between [0 - 49].
+        int montantPerte = rand.nextInt(50);
+
+        Personnage unPersonnage = new Personnage();
+        int montantDepart = 20;
+        unPersonnage.setOr(montantDepart);
+
+        boolean testboolean=unPersonnage.perteOr(montantPerte);
+
+        if(montantPerte>montantDepart){
+            assertEquals("TestPerteorBoolean", false, testboolean);
+        }else{
+            assertEquals("TestGainExp", true, testboolean);
+        }
+
+
+    }
 }

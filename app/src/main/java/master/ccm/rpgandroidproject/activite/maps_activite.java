@@ -1,10 +1,8 @@
 package master.ccm.rpgandroidproject.activite;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -15,7 +13,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.common.collect.MapMaker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +25,7 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
     private GoogleMap mMap;
     private List<MarkerOptions> listeFeuCamp = new ArrayList<MarkerOptions>();
     private List<MarkerOptions> listeMonstre = new ArrayList<MarkerOptions>();
-
+    private List<MarkerOptions> listeDongeon = new ArrayList<MarkerOptions>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +57,11 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
     }
     public void MiseAJourCoordonnes() {
         mMap.clear();
-        Toast.makeText(this,"lol j'ai bougé",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"j'ai bougé",Toast.LENGTH_LONG).show();
         // Add a marker in Sydney and move the camera
         LatLng maPosition = new LatLng(StaticUtilisateurInfo.getInstance().getCoordonnes().getLatitude(), StaticUtilisateurInfo.getInstance().getCoordonnes().getLongitude());
-        MarkerOptions maPositionMarker =new MarkerOptions().position(maPosition).title("Me");
+        MarkerOptions maPositionMarker =new MarkerOptions().position(maPosition).title("Me").icon(BitmapDescriptorFactory.fromResource(R.drawable.pointeurpersonnage));
+        //
         //maPositionMarker.
         mMap.setOnMarkerClickListener(this);
         mMap.addMarker(maPositionMarker);
@@ -83,8 +81,14 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
         //création de feu de camp
 
         LatLng positionCamp = new LatLng( 49.56535,3.609383);
+
+        /*mMap.addMarker(new MarkerOptions()
+                .position(positionCamp)
+                .title("Campement")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icone_feu_camp2)));*/
+
         MarkerOptions feuCampMarker =new MarkerOptions().position(positionCamp).title("Campement");
-        feuCampMarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.icone_feu_camp2) );
+        feuCampMarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.taverne_icone3) );
         listeFeuCamp.add(feuCampMarker);
 
         mMap.addMarker(feuCampMarker);
@@ -98,16 +102,39 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        if(listeMonstre.contains(marker)){
+        boolean contient =contientMarker(listeMonstre,marker);
+        Toast.makeText(this, "j'ai cliker sur "+marker.getTitle() +" "+ contient,
+                Toast.LENGTH_SHORT).show();
+        contientMarker(listeMonstre,marker);
+
+        if(contientMarker(listeMonstre,marker)){
             Toast.makeText(this, "j'ai cliker sur un monstre",
                     Toast.LENGTH_SHORT).show();
-
+            Intent combatMonstre = new Intent(this,Combat_activite.class);
+            startActivity(combatMonstre);
         }
-        if(listeFeuCamp.contains(marker)){
+        if(contientMarker(listeFeuCamp,marker)){
             Toast.makeText(this, "j'ai cliker sur un Feu de camp",
                     Toast.LENGTH_SHORT).show();
+            Intent feuDecamp = new Intent(this, taverne_activite.class);
+            startActivity(feuDecamp);
 
         }
         return true;
+    }
+    public boolean contientMarker(List<MarkerOptions> listMarkerOptions,Marker leMarkerATrouver) {
+        for (MarkerOptions unMarker : listMarkerOptions)
+        {
+            /*
+            if(unMarker.getTitle().equals(leMarkerATrouver.getTitle())){
+                return true;
+            }*/
+
+            if(unMarker.getPosition().equals(leMarkerATrouver.getPosition())){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

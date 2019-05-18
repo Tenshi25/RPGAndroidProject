@@ -46,8 +46,9 @@ public class formAjoutPersonnage extends AppCompatActivity {
         unPersonnage.setNiveau(1);
         unPersonnage.setExperience(0);
         unPersonnage.setExpNiveauSuivant(20);
+        unPersonnage.setOr(20);
         unPersonnage.setClasse(listclasse.getSelectedItem().toString());
-        //a remplacer par une fonction qui demande à l'api rest
+        //a remplacer par une fonction qui demande à l'api rest (PVMax)
         int pvmax = 8;
         unPersonnage.setPvMax(pvmax);
         unPersonnage.setPv(pvmax);

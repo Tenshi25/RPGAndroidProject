@@ -23,4 +23,9 @@
     <string name="title_activity_form_modif_perso">Formulaire de modification de personnage</string>
     <string name="title_activity_maps_activite">Carte monde</string>
     <string name="bt_map">Carte monde</string>
+    <string name="bt_ReposCourt">se reposer</string>
+    <string name="bt_reposLong" >rester dormir</string>
+    <string name="tv_tavern">Vous êtes dans une taverne</string>
+    <string name="bt_attaquer">Attaquer</string>
+    <string name="bt_Fuir">Fuir</string>
 </resources>
