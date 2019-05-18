@@ -114,7 +114,7 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
             startActivity(combatMonstre);
         }
         if(contientMarker(listeFeuCamp,marker)){
-            Toast.makeText(this, "j'ai cliker sur un Feu de camp",
+            Toast.makeText(this, "j'ai cliker sur une taverne",
                     Toast.LENGTH_SHORT).show();
             Intent feuDecamp = new Intent(this, taverne_activite.class);
             startActivity(feuDecamp);

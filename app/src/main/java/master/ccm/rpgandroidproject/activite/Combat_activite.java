@@ -22,7 +22,10 @@ public class Combat_activite extends AppCompatActivity {
     }
 
     public void onClickAttaquer(View view) {
-        StaticUtilisateurInfo.getInstance().getPersonnageCourant().pertePv(4);
-        Toast.makeText(this, "Vous avez "+StaticUtilisateurInfo.getInstance().getPersonnageCourant().getPv(), Toast.LENGTH_LONG).show();
+        int pointDegat = 4;
+        StaticUtilisateurInfo.getInstance().getPersonnageCourant().pertePv(pointDegat);
+        Toast.makeText(this, "Vous avez perdu "+ pointDegat + " point de vie", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Vous avez "+StaticUtilisateurInfo.getInstance().getPersonnageCourant().getPv() + " point de vie", Toast.LENGTH_LONG).show();
+
     }
 }

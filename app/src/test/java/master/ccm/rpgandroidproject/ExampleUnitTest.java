@@ -1,11 +1,14 @@
 package master.ccm.rpgandroidproject;
 
+import android.app.Activity;
+
 import org.junit.Test;
 
 import java.util.Random;
 
 import master.ccm.rpgandroidproject.Entity.Personnage;
 import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
+import master.ccm.rpgandroidproject.activite.taverne_activite;
 
 import static org.junit.Assert.*;
 
@@ -121,6 +124,21 @@ public class ExampleUnitTest {
             assertEquals("TestGainExp", true, testboolean);
         }
 
+
+    }
+    @Test
+    public void testGetRandom() throws Exception {
+
+        taverne_activite taverne_activity = new taverne_activite();
+        int min = 10;
+        int max = 20;
+        int randomValue = taverne_activity.getRandomNumberInRange(min,max);
+        boolean resultatboolean = false;
+        if( randomValue<max && randomValue>min){
+            resultatboolean =true;
+
+        }
+        assertEquals("TestRandom", true, resultatboolean);
 
     }
 }

@@ -23,7 +23,7 @@
     <string name="title_activity_maps_activite">Map</string>
     <string name="bt_map">Map</string>
     <string name="bt_ReposCourt">rest</string>
-    <string name="bt_reposLong" >stay to sleep</string>
+    <string name="bt_reposLong" >stay to sleep (10 gold)</string>
     <string name="title_activity_form_modif_perso">Change character</string>
     <string name="tv_tavern">Your are in a tavern</string>
     <string name="bt_attaquer">Attaquer</string>
