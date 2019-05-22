@@ -2,6 +2,7 @@ package master.ccm.rpgandroidproject.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Personnage {
     private String id;
@@ -19,10 +20,11 @@ public class Personnage {
     private int sagesse;
     private int charisme;
     private String classe;
-    private Item Armeprincipal;
-    private Item Armure;
+    private ItemArme Armeprincipal;
+    private ItemArmure Armure;
     private int or;
     private List<Item>Inventaire;
+    private int CapArmure;
 
     //private List<Stats> statistique=new ArrayList<Stats>();
 
@@ -99,7 +101,14 @@ public class Personnage {
         if (this.experience >= expNiveauSuivant){
             setExperience(this.experience-this.expNiveauSuivant);
             setNiveau(this.niveau+1);
+            setExpNiveauSuivant(getExpNiveauSuivant()*2+10);
+            setPvMax(getRandomNumberInRange(1,8));
+            setPv(getPvMax());
         }
+    }
+    public static int getRandomNumberInRange(int min, int max) {
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
     }
     public boolean perteOr(int montantOr){
         if (this.or >= montantOr){
@@ -196,19 +205,19 @@ public class Personnage {
         this.charisme = charisme;
     }
 
-    public Item getArmeprincipal() {
+    public ItemArme getArmeprincipal() {
         return Armeprincipal;
     }
 
-    public void setArmeprincipal(Item armeprincipal) {
+    public void setArmeprincipal(ItemArme armeprincipal) {
         Armeprincipal = armeprincipal;
     }
 
-    public Item getArmure() {
+    public ItemArmure getArmure() {
         return Armure;
     }
 
-    public void setArmure(Item armure) {
+    public void setArmure(ItemArmure armure) {
         Armure = armure;
     }
 
@@ -233,5 +242,22 @@ public class Personnage {
 
     public void setOr(int or) {
         this.or = or;
+    }
+
+    public int getCapArmure() {
+        return CapArmure;
+    }
+
+    public void setCapArmure(int capArmure) {
+        CapArmure = capArmure;
+    }
+    public boolean VerifPvMort(){
+        if (this.pv <= 0){
+            setPv(0);
+            return true;
+        }else{
+            return false;
+        }
+
     }
 }

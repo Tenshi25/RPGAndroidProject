@@ -28,4 +28,5 @@
     <string name="tv_tavern">Your are in a tavern</string>
     <string name="bt_attaquer">Attaquer</string>
     <string name="bt_Fuir">Fuir</string>
+    <string name="bt_retour_MenuPrincipal">Retour au choix de personnages</string>
 </resources>

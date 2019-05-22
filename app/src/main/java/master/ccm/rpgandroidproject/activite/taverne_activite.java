@@ -1,5 +1,6 @@
 package master.ccm.rpgandroidproject.activite;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,9 +11,10 @@ import java.util.Random;
 
 import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
 import master.ccm.rpgandroidproject.R;
+import master.ccm.rpgandroidproject.manager.BDDManager;
 
 public class taverne_activite extends AppCompatActivity {
-
+    BDDManager bddManager =new BDDManager();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,8 @@ public class taverne_activite extends AppCompatActivity {
 
     public void onClickRetour(View view) {
         this.finish();
+        Intent maps_activit = new Intent(this, maps_activite.class);
+        startActivity(maps_activit);
     }
 
     public void onClickReposLong(View view) {
@@ -32,7 +36,7 @@ public class taverne_activite extends AppCompatActivity {
         }else{
             Toast.makeText(this, "Désolez, vous n'avez pas assez d'or", Toast.LENGTH_SHORT).show();
         }
-
+        bddManager.UpdateDataPersonnage(StaticUtilisateurInfo.getInstance().getPersonnageCourant());
 
     }
 
@@ -51,6 +55,8 @@ public class taverne_activite extends AppCompatActivity {
         }else{
             Toast.makeText(this, "Vous vous êtes reposé il y a moins de 5 minutes", Toast.LENGTH_SHORT).show();
         }
+
+        bddManager.UpdateDataPersonnage(StaticUtilisateurInfo.getInstance().getPersonnageCourant());
 
     }
     public static int getRandomNumberInRange(int min, int max) {

@@ -23,8 +23,9 @@
     <string name="title_activity_maps_activite">Map</string>
     <string name="bt_map">Map</string>
     <string name="bt_ReposCourt">Repos court</string>
-    <string name="bt_reposLong" >Repos Long</string>
-    <string name="tv_tavern" >Your are in a tavern</string>
+    <string name="bt_reposLong">Repos Long</string>
+    <string name="tv_tavern">Your are in a tavern</string>
     <string name="bt_attaquer">Attaquer</string>
     <string name="bt_Fuir">Fuir</string>
+    <string name="bt_retour_MenuPrincipal">Retour au choix de personnages</string>
 </resources>

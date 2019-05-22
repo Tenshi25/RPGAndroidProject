@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import master.ccm.rpgandroidproject.Entity.Item;
+import master.ccm.rpgandroidproject.Entity.ItemArme;
 import master.ccm.rpgandroidproject.Entity.Personnage;
 import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
 import master.ccm.rpgandroidproject.Entity.Stats;
@@ -187,6 +188,7 @@ public class BDDManager {
                                 unPersonnage.setPvMax(Integer.parseInt(document.get("pvMax").toString()));
                                 unPersonnage.setClasse(document.get("classePersonnage").toString());
                                 unPersonnage.setOr(Integer.parseInt(document.get("or").toString()));
+                                unPersonnage.setOr(Integer.parseInt(document.get("CapArm").toString()));
 
                                 listPersonnages.add(unPersonnage);
                                 Log.i("logNomPerso", "Nom :" + unPersonnage.getPrenom() + "Prenom : " + unPersonnage.getPrenom());
@@ -222,6 +224,7 @@ public class BDDManager {
         PersonnageMap.put("pv", unPersonnage.getPv());
         PersonnageMap.put("pvMax", unPersonnage.getPvMax());
         PersonnageMap.put("or", unPersonnage.getOr());
+        PersonnageMap.put("CapArm", unPersonnage.getOr());
 
 
         database.collection("Personnage").add(PersonnageMap)
@@ -268,7 +271,7 @@ public class BDDManager {
         VerifPersonnage(unUtilisateur,context,unPersonnage);
         //InsertDatastorePersonnage(unUtilisateur,unPersonnage,context);
     }
-    public void SupprPersonnage(final pageChoixPerso context, Personnage unPersonnage){
+    public void SupprPersonnage( Personnage unPersonnage){
         database.collection("Personnage").document(unPersonnage.getId())
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -286,6 +289,7 @@ public class BDDManager {
 
         //InsertDatastorePersonnage(unUtilisateur,unPersonnage,context);
     }
+
     public void ModifPersonnage (final Personnage unPersonnage, final formModifPersonnage context)
     {
         Map<String, Object> personnageMap = new HashMap<>();
@@ -310,6 +314,25 @@ public class BDDManager {
                 Log.i("ModifPersonnage","Erreur le personnage n'a pas été modifier ");
             }
         });
+    }
+    public void UpdateDataPersonnage (Personnage unPersonnage){
+        DocumentReference washingtonRef = database.collection("Personnage").document(unPersonnage.getId());
+
+        // Set the "isCapital" field of the city 'DC'
+        washingtonRef
+                .update("pv",unPersonnage.getPv(),"niveau",unPersonnage.getNiveau(),"experience",unPersonnage.getExperience(),"expNiveauSuivant",unPersonnage.getExpNiveauSuivant(),"or", unPersonnage.getOr())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("updateDataPersonnage", "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("updateDataPersonnage", "Error updating document", e);
+                    }
+                });
     }
 
         /*
@@ -495,24 +518,28 @@ public class BDDManager {
     {
 
         Map<String, Object> itemMap = new HashMap<>();
-        Map<String, Object> itemEffet = new HashMap<>();
         itemMap.put("idPersonnage", unPersonnage.getId());
         itemMap.put("nom", unItem.getNom());
-        itemMap.put("TypeItem", unItem.getTypeItem());
-        itemMap.put("quantite", unItem.getQuantite());
-
-        // à finir
-        //itemMap.put("valeur", );
-
-
+        itemMap.put("typeItem", unItem.getTypeItem());
+        if(unItem.getTypeItem().equals("arme"))
+        {
+            ItemArme monArme =(ItemArme) unItem;
+            itemMap.put("equiper", monArme.isEquiper());
+            itemMap.put("minDegat", monArme.getMinDegat());
+            itemMap.put("maxDegat", monArme.getMaxDegat());
+        }
 
         database.collection("Inventaire").add(itemMap)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                             Log.i("ajoutItem","L'item à été Ajouter");
-//
-                            //context.InsertSuccess();
+                            if(context.getClass() == formAjoutPersonnage.class)
+                            {
+                                formAjoutPersonnage formAjoutPContext = (formAjoutPersonnage) context;
+                                formAjoutPContext.InsertArmeSuccess(/*task.getResult().getId()*/);
+                            }
+
                         }
 
 
@@ -552,4 +579,6 @@ public class BDDManager {
                     }
                 });
     }
+
+
 }
