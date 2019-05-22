@@ -156,7 +156,7 @@ public class pageChoixPerso extends AppCompatActivity {
         Personnage PersonnageASupprimer = listePersonnage.get(position);
         Toast.makeText(this,"Personnage à supprimer : id : "+PersonnageASupprimer.getId() +" "+ PersonnageASupprimer.getNom()+ ", "+ PersonnageASupprimer.getPrenom() ,Toast.LENGTH_SHORT).show();
         BDDManager unBDDManager =  new BDDManager();
-        unBDDManager.SupprPersonnage(this,PersonnageASupprimer);
+        unBDDManager.SupprPersonnage(PersonnageASupprimer);
         listePersonnage.remove(PersonnageASupprimer);
         int cpt = 0;
         test = new Personnage[listePersonnage.size()];
