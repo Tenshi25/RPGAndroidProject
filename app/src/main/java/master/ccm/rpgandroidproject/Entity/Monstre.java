@@ -1,8 +1,7 @@
 package master.ccm.rpgandroidproject.Entity;
 
-public class Monstre {
-    private String nom;
-    private int pvMax,pv;
+public class Monstre extends EtreVivant{
+
     private int force;
     private ItemArme Arme;
     private ItemArmure Armure;
@@ -26,29 +25,6 @@ public class Monstre {
         this.capArm = capArm;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public int getPvMax() {
-        return pvMax;
-    }
-
-    public void setPvMax(int pvmax) {
-        this.pvMax = pvmax;
-    }
-
-    public int getPv() {
-        return pv;
-    }
-
-    public void setPv(int pv) {
-        this.pv = pv;
-    }
 
     public int getForce() {
         return force;
@@ -81,23 +57,6 @@ public class Monstre {
         }
     }
 
-    public void gainPv(int pvRegain){
-        if (this.pv < this.pvMax){
-            setPv(this.pv+pvRegain);
-        }
-        if (this.pv> pvMax){
-            setPv(pvMax);
-        }
-    }
-    public boolean VerifPvMort(){
-        if (this.pv <= 0){
-            setPv(0);
-            return true;
-        }else{
-            return false;
-        }
-
-    }
 
     public int getValeurExp() {
         return valeurExp;

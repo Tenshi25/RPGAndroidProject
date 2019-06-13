@@ -126,6 +126,7 @@ public class ExampleUnitTest {
 
 
     }
+    /*
     @Test
     public void testGetRandom() throws Exception {
 
@@ -140,5 +141,5 @@ public class ExampleUnitTest {
         }
         assertEquals("TestRandom", true, resultatboolean);
 
-    }
+    }*/
 }

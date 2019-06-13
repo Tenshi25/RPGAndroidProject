@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Personnage {
-    private String id;
-    private String nom;
+public class Personnage extends EtreVivant{
+
+
     private String prenom;
     private int experience;
-    private int pv;
-    private int pvMax;
     private int niveau;
     private int expNiveauSuivant;
     private int force;
@@ -40,14 +38,6 @@ public class Personnage {
     }
     public Personnage(){}
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
     public String getPrenom() {
         return prenom;
     }
@@ -64,36 +54,6 @@ public class Personnage {
         this.experience = experience;
     }
 
-    public int getPv() {
-        return pv;
-    }
-
-    public void setPv(int pv) {
-        this.pv = pv;
-    }
-    public int getPvMax() {
-        return pvMax;
-    }
-
-    public void setPvMax(int pvMax) {
-        this.pvMax = pvMax;
-    }
-    public void pertePv(int pvDegat){
-        if (this.pv>= pvDegat) {
-            setPv(this.pv - pvDegat);
-        }else{
-            setPv(0);
-        }
-    }
-
-    public void gainPv(int pvRegain){
-        if (this.pv < this.pvMax){
-            setPv(this.pv+pvRegain);
-        }
-        if (this.pv> pvMax){
-            setPv(pvMax);
-        }
-    }
     public void gainExp(int exp){
         if (this.experience < this.expNiveauSuivant){
             setExperience(this.experience+exp);
@@ -149,13 +109,6 @@ public class Personnage {
         this.classe = classe;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public int getForce() {
         return force;
@@ -251,13 +204,5 @@ public class Personnage {
     public void setCapArmure(int capArmure) {
         CapArmure = capArmure;
     }
-    public boolean VerifPvMort(){
-        if (this.pv <= 0){
-            setPv(0);
-            return true;
-        }else{
-            return false;
-        }
 
-    }
 }
