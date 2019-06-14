@@ -66,4 +66,12 @@ public class CombatCore {
     public void setListeCombattant(ArrayList<EtreVivant> listeCombattant) {
         this.listeCombattant = listeCombattant;
     }
+
+    public int getIdCombat() {
+        return idCombat;
+    }
+
+    public void setIdCombat(int idCombat) {
+        this.idCombat = idCombat;
+    }
 }

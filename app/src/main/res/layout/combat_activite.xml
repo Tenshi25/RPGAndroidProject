@@ -48,7 +48,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_pv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/fui_idp_button_background_email"
+                android:textColor="@color/browser_actions_bg_grey"
+                android:textSize="18sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <ImageView

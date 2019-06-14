@@ -112,14 +112,14 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
     public void MiseAJourCoordonnes() {
         mMap.clear();
 
-        Toast.makeText(this,"j'ai bougé",Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"j'ai bougé",Toast.LENGTH_LONG).show();
         // Add a marker in Sydney and move the camera
         LatLng maPosition = new LatLng(StaticUtilisateurInfo.getInstance().getCoordonnes().getLatitude(), StaticUtilisateurInfo.getInstance().getCoordonnes().getLongitude());
         MarkerOptions maPositionMarker =new MarkerOptions().position(maPosition).title("Me").icon(BitmapDescriptorFactory.fromResource(R.drawable.pointeurpersonnage));
         //
         //maPositionMarker.
         mMap.setOnMarkerClickListener(this);
-        mMap.addMarker(maPositionMarker);
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(maPosition));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(17));
 
@@ -129,7 +129,7 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
         //création de feu de camp
         createRandomMonstre(10);
         createRandomTaverne(5);
-
+        mMap.addMarker(maPositionMarker);
         //LatLng positionCamp = new LatLng( 49.56531,3.609383);
 
         /*mMap.addMarker(new MarkerOptions()

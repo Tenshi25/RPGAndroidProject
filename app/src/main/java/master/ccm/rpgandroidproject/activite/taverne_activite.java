@@ -44,6 +44,7 @@ public class taverne_activite extends AppCompatActivity {
         Date now = new Date();
         long diff =now.getTime()-StaticUtilisateurInfo.getInstance().getDernierReposCourt().getTime();
         long diffMinutes = diff / (60*1000);
+        // 5 min = 60*5 s= 300 s = 300 000 nanos
         if(diffMinutes>=5){
             int min = 1;
             int max = 6;

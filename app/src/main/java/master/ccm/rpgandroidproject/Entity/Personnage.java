@@ -62,7 +62,7 @@ public class Personnage extends EtreVivant{
             setExperience(this.experience-this.expNiveauSuivant);
             setNiveau(this.niveau+1);
             setExpNiveauSuivant(getExpNiveauSuivant()*2+10);
-            setPvMax(getRandomNumberInRange(1,8));
+            setPvMax(getPvMax()+getRandomNumberInRange(1,8));
             setPv(getPvMax());
         }
     }

@@ -320,7 +320,7 @@ public class BDDManager {
 
         // Set the "isCapital" field of the city 'DC'
         washingtonRef
-                .update("pv",unPersonnage.getPv(),"niveau",unPersonnage.getNiveau(),"experience",unPersonnage.getExperience(),"expNiveauSuivant",unPersonnage.getExpNiveauSuivant(),"or", unPersonnage.getOr())
+                .update("pv",unPersonnage.getPv(),"pvMax",unPersonnage.getPvMax(),"niveau",unPersonnage.getNiveau(),"experience",unPersonnage.getExperience(),"expNiveauSuivant",unPersonnage.getExpNiveauSuivant(),"or", unPersonnage.getOr())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

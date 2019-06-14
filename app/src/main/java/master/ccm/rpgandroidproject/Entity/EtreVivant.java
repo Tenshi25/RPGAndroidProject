@@ -46,6 +46,15 @@ public class EtreVivant {
             setPv(pvMax);
         }
     }
+    public void pertePv(int pvPerte){
+        if (this.pv < pvPerte){
+
+            setPv(this.pv-pvPerte);
+        }
+        if (this.pv > pvPerte){
+            setPv(this.pv-pvPerte);
+        }
+    }
     public boolean VerifPvMort(){
         if (this.pv <= 0){
             setPv(0);

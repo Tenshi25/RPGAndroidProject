@@ -11,7 +11,7 @@ public class StaticUtilisateurInfo {
     private Personnage personnageCourant;
     private ArrayList<Item> listeItemBase=new ArrayList<>();
     private Location Coordonnes = new Location();
-    private Date DernierReposCourt = new Date();
+    private Date DernierReposCourt ;
 
     private static StaticUtilisateurInfo sui = null;
 
@@ -66,7 +66,14 @@ public class StaticUtilisateurInfo {
     }
 
     public Date getDernierReposCourt() {
-        return DernierReposCourt;
+        if(DernierReposCourt == null){
+            Date ladatedefaut = new Date();
+            ladatedefaut.setTime(ladatedefaut.getTime()-400000);
+            return ladatedefaut;
+        }else{
+            return DernierReposCourt;
+        }
+
     }
 
     public void setDernierReposCourt(Date dernierReposCourt) {

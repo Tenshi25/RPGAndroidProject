@@ -126,6 +126,30 @@ public class ExampleUnitTest {
 
 
     }
+    @Test
+    public void testPertePv() throws Exception {
+
+        Random rand = new Random();
+
+        // Obtain a number between [0 - 49].
+        int montantPerte = rand.nextInt(60);
+
+        Personnage unPersonnage = new Personnage();
+        int PvDepart = 20;
+        unPersonnage.setPv(PvDepart);
+        unPersonnage.setPvMax(PvDepart);
+
+        unPersonnage.pertePv(montantPerte);
+        boolean testboolean=unPersonnage.VerifPvMort();
+
+        if(montantPerte >= PvDepart){
+            assertEquals("TestPersonnageMort", true, testboolean);
+        }else{
+            assertEquals("TestPersonnageVivant", false, testboolean);
+        }
+
+
+    }
     /*
     @Test
     public void testGetRandom() throws Exception {
