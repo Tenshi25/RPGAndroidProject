@@ -24,6 +24,7 @@ public class Combat_activite extends AppCompatActivity {
     TextView textbox;
     Monstre unMonstre;
     Personnage hero;
+    boolean attaqueEnCours;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,76 +114,79 @@ public class Combat_activite extends AppCompatActivity {
     }
 
     public void onClickAttaquer(View view) {
-        //view.setClickable(false);
-        view.setEnabled(false);
-        //Attaque Du Héros
-        int resultDe,DegatDe ;
-        DegatDe =0;
-        resultDe = 0;
-        //hero=StaticUtilisateurInfo.getInstance().getPersonnageCourant();
-        switch(hero.getClasse()) {
-            case "Guerrier":
-                resultDe = getRandomNumberInRange(1, 20) + Math.round((float) ((hero.getForce() - 10) / 2));
-                break;
-            case "Mage":
-                resultDe = getRandomNumberInRange(1, 20) + Math.round((float) ((hero.getInteligence() - 10) / 2));
-                break;
-            case "Rodeur":
-                resultDe = getRandomNumberInRange(1, 20) + Math.round((float) ((hero.getDexterite() - 10) / 2));
-                break;
-        }
-        if(resultDe > unMonstre.getCapArm()){
-            imageMonstre.setColorFilter(1);
-            if(hero.getArmeprincipal() != null){
-                DegatDe = getRandomNumberInRange(hero.getArmeprincipal().getMinDegat(),hero.getArmeprincipal().getMaxDegat());
-            }else{
-                DegatDe = getRandomNumberInRange(2,4);
+        if (attaqueEnCours == false) {
+            attaqueEnCours = true;
+            //Attaque Du Héros
+            int resultDe, DegatDe;
+            DegatDe = 0;
+            resultDe = 0;
+            //hero=StaticUtilisateurInfo.getInstance().getPersonnageCourant();
+            switch (hero.getClasse()) {
+                case "Guerrier":
+                    resultDe = getRandomNumberInRange(1, 20) + Math.round((float) ((hero.getForce() - 10) / 2));
+                    break;
+                case "Mage":
+                    resultDe = getRandomNumberInRange(1, 20) + Math.round((float) ((hero.getInteligence() - 10) / 2));
+                    break;
+                case "Rodeur":
+                    resultDe = getRandomNumberInRange(1, 20) + Math.round((float) ((hero.getDexterite() - 10) / 2));
+                    break;
             }
-            Toast.makeText(this, "Vous avez touché "+unMonstre.getNom() +"Et lui avez infligé "+ DegatDe, Toast.LENGTH_LONG).show();
-            unMonstre.pertePv(DegatDe);
-            imageMonstre.clearColorFilter();
-        }else{
-            Toast.makeText(this, "Vous avez raté votre attaque ", Toast.LENGTH_LONG).show();
-        }
+            if (resultDe > unMonstre.getCapArm()) {
+                imageMonstre.setColorFilter(1);
+                if (hero.getArmeprincipal() != null) {
+                    DegatDe = getRandomNumberInRange(hero.getArmeprincipal().getMinDegat(), hero.getArmeprincipal().getMaxDegat());
+                } else {
+                    DegatDe = getRandomNumberInRange(2, 4);
+                }
+                Toast.makeText(this, "Vous avez touché " + unMonstre.getNom() + " et lui avez infligé " + DegatDe, Toast.LENGTH_SHORT).show();
+                unMonstre.pertePv(DegatDe);
+                imageMonstre.clearColorFilter();
+            } else {
+                Toast.makeText(this, "Vous avez raté votre attaque ", Toast.LENGTH_SHORT).show();
+            }
 
 
-        if(unMonstre.VerifPvMort()){
-            Toast.makeText(this, "Le Monstre est mort et vous avez gagné " +unMonstre.getValeurExp(), Toast.LENGTH_LONG).show();
-            hero.gainExp(unMonstre.getValeurExp());
-            hero.gainOr(getRandomNumberInRange(0,unMonstre.getMaxOr()));
+            if (unMonstre.VerifPvMort()) {
+                hero.gainExp(unMonstre.getValeurExp());
+                int gainOr =getRandomNumberInRange(0, unMonstre.getMaxOr());
+                hero.gainOr(gainOr);
+                Toast.makeText(this, "Le Monstre est mort et vous avez gagné " + unMonstre.getValeurExp() + " d'expérience et "+ gainOr +" pièce d'Or", Toast.LENGTH_LONG).show();
 
-            BDDManager bddManager =new BDDManager();
-            bddManager.UpdateDataPersonnage(hero);
-            imageMonstre.setVisibility(View.INVISIBLE);
+
+                BDDManager bddManager = new BDDManager();
+                bddManager.UpdateDataPersonnage(hero);
+                imageMonstre.setVisibility(View.INVISIBLE);
             /*try {
                 wait(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }*/
-            this.finish();
-        }else {
-            //Attaque du Monstre
-            resultDe = getRandomNumberInRange(1, 20) + Math.round((float) ((unMonstre.getForce() - 10) / 2));
-            if (resultDe > hero.getCapArmure()) {
-                DegatDe = getRandomNumberInRange(unMonstre.getArme().getMinDegat(), unMonstre.getArme().getMaxDegat());
-                hero.pertePv(DegatDe);
-                textbox.setText("PV : "+String.valueOf(hero.getPv()));
-                Toast.makeText(this, "Vous avez été touché ! vous avez perdu " + DegatDe + " pv", Toast.LENGTH_LONG).show();
+                this.finish();
             } else {
-                Toast.makeText(this, "Le " + unMonstre.getNom() + " vous a raté", Toast.LENGTH_LONG).show();
-            }
-            BDDManager bddManager =new BDDManager();
-            if (hero.VerifPvMort()) {
-                bddManager.SupprPersonnage(hero);
-                Toast.makeText(this, "Votre personnage est mort ", Toast.LENGTH_LONG).show();
-                Intent monIntent = new Intent(this, GameOver.class);
-                startActivity(monIntent);
-                finish();
-            }
+                //Attaque du Monstre
+                resultDe = getRandomNumberInRange(1, 20) + Math.round((float) ((unMonstre.getForce() - 10) / 2));
+                if (resultDe > hero.getCapArmure()) {
+                    DegatDe = getRandomNumberInRange(unMonstre.getArme().getMinDegat(), unMonstre.getArme().getMaxDegat());
+                    hero.pertePv(DegatDe);
+                    textbox.setText("PV : " + String.valueOf(hero.getPv()));
+                    Toast.makeText(this, "Vous avez été touché ! vous avez perdu " + DegatDe + " pv", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "Le " + unMonstre.getNom() + " vous a raté", Toast.LENGTH_LONG).show();
+                }
+                BDDManager bddManager = new BDDManager();
+                if (hero.VerifPvMort()) {
+                    bddManager.SupprPersonnage(hero);
+                    Toast.makeText(this, "Votre personnage est mort ", Toast.LENGTH_LONG).show();
+                    Intent monIntent = new Intent(this, GameOver.class);
+                    startActivity(monIntent);
+                    finish();
+                }
 
-            bddManager.UpdateDataPersonnage(StaticUtilisateurInfo.getInstance().getPersonnageCourant());
+                bddManager.UpdateDataPersonnage(StaticUtilisateurInfo.getInstance().getPersonnageCourant());
+            }
+            attaqueEnCours = false;
         }
-        view.setEnabled(true);
         //view.setClickable(true);
 
         /*int pointDegat = 4;

@@ -114,7 +114,7 @@ public class pageChoixPerso extends AppCompatActivity {
     }
 
     public void AffichePersonnageClicker(Personnage p_personnage) {
-        Toast.makeText(this,"personnage : " + p_personnage.getNom(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"personnage : " + p_personnage.getNom(),Toast.LENGTH_SHORT).show();
     }
     public void onConnectDisconnect(View view) {
         /*BDDManager unBDDManager =  new BDDManager();
@@ -138,7 +138,7 @@ public class pageChoixPerso extends AppCompatActivity {
         View parentRow = (View) view.getParent();
         ListView listView = (ListView) parentRow.getParent();
         final int position = listView.getPositionForView(parentRow);
-        Toast.makeText(this,"position : " + position ,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"position : " + position ,Toast.LENGTH_SHORT).show();
         Personnage PersonnageAModif = listePersonnage.get(position);
 
         Intent monIntent = new Intent (this, formModifPersonnage.class);
@@ -152,9 +152,9 @@ public class pageChoixPerso extends AppCompatActivity {
         View parentRow = (View) view.getParent();
         ListView listView = (ListView) parentRow.getParent();
         final int position = listView.getPositionForView(parentRow);
-        Toast.makeText(this,"position : " + position ,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"position : " + position ,Toast.LENGTH_SHORT).show();
         Personnage PersonnageASupprimer = listePersonnage.get(position);
-        Toast.makeText(this,"Personnage à supprimer : id : "+PersonnageASupprimer.getId() +" "+ PersonnageASupprimer.getNom()+ ", "+ PersonnageASupprimer.getPrenom() ,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"Personnage à supprimer : id : "+PersonnageASupprimer.getId() +" "+ PersonnageASupprimer.getNom()+ ", "+ PersonnageASupprimer.getPrenom() ,Toast.LENGTH_SHORT).show();
         BDDManager unBDDManager =  new BDDManager();
         unBDDManager.SupprPersonnage(PersonnageASupprimer);
         listePersonnage.remove(PersonnageASupprimer);
@@ -173,9 +173,9 @@ public class pageChoixPerso extends AppCompatActivity {
         View parentRow = (View) view.getParent();
         ListView listView = (ListView) parentRow.getParent();
         final int position = listView.getPositionForView(parentRow);
-        Toast.makeText(this,"position : " + position ,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"position : " + position ,Toast.LENGTH_SHORT).show();
         StaticUtilisateurInfo.getInstance().setPersonnageCourant(listePersonnage.get(position)) ;
-        Toast.makeText(this,"Personnage séléctionner : "+listePersonnage.get(position).getId() +" "+ listePersonnage.get(position).getNom()+ ", "+ listePersonnage.get(position).getPrenom() ,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"Personnage séléctionner : "+listePersonnage.get(position).getId() +" "+ listePersonnage.get(position).getNom()+ ", "+ listePersonnage.get(position).getPrenom() ,Toast.LENGTH_SHORT).show();
 
         Intent monIntent = new Intent (this, MenuPersonnage.class);
         startActivity(monIntent);

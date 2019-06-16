@@ -43,6 +43,7 @@ public class ServiceSuiviGeo extends Service {
     public void onCreate() {
         Log.i("", "onCreateSuiviGeo");
         listener = new LocationListener() {
+
             @Override
             public void onLocationChanged(Location location) {
 

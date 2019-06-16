@@ -23,8 +23,8 @@ public class taverne_activite extends AppCompatActivity {
 
     public void onClickRetour(View view) {
         this.finish();
-        Intent maps_activit = new Intent(this, maps_activite.class);
-        startActivity(maps_activit);
+        /*Intent maps_activit = new Intent(this, maps_activite.class);
+        startActivity(maps_activit);*/
     }
 
     public void onClickReposLong(View view) {

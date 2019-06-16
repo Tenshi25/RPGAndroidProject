@@ -9,6 +9,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import master.ccm.rpgandroidproject.Entity.ItemArme;
 import master.ccm.rpgandroidproject.Entity.ItemFactory;
 import master.ccm.rpgandroidproject.Entity.Personnage;
@@ -22,7 +32,10 @@ public class formAjoutPersonnage extends AppCompatActivity {
     private EditText champNomPersonnage;
     private EditText champPrenomPersonnage;
     private Spinner listclasse;
+    private int pvmax;
+    private ItemArme armeHero;
     private static Utilisateur unUtilisateur = new Utilisateur();
+    String URL ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +65,7 @@ public class formAjoutPersonnage extends AppCompatActivity {
         unPersonnage.setOr(20);
         unPersonnage.setClasse(listclasse.getSelectedItem().toString());
         ItemFactory maFabriqueItem = new ItemFactory();
-        ItemArme armeHero;
+        //ItemArme armeHero;
 
         armeHero = (ItemArme) maFabriqueItem.fabriqueMoiUnItem("Arme");
         armeHero.setNom("Epée");
@@ -70,6 +83,8 @@ public class formAjoutPersonnage extends AppCompatActivity {
                 unPersonnage.setInteligence(10);
                 unPersonnage.setSagesse(8);
                 unPersonnage.setDexterite(12);
+
+                URL ="http://www.dnd5eapi.co/api/classes/5/";
                 // code block
                 break;
             case "Mage":
@@ -81,6 +96,7 @@ public class formAjoutPersonnage extends AppCompatActivity {
                 unPersonnage.setInteligence(16);
                 unPersonnage.setSagesse(14);
                 unPersonnage.setDexterite(10);
+                URL ="http://www.dnd5eapi.co/api/classes/12/";
 
                 armeHero = (ItemArme) maFabriqueItem.fabriqueMoiUnItem("Arme");
                 armeHero.setNom("Septre");
@@ -100,6 +116,8 @@ public class formAjoutPersonnage extends AppCompatActivity {
                 unPersonnage.setSagesse(14);
                 unPersonnage.setDexterite(16);
 
+                URL ="http://www.dnd5eapi.co/api/classes/8/";
+
                 armeHero = (ItemArme) maFabriqueItem.fabriqueMoiUnItem("Arme");
                 armeHero.setNom("arc court");
                 armeHero.setTypeItem("arme");
@@ -111,10 +129,41 @@ public class formAjoutPersonnage extends AppCompatActivity {
                 unPersonnage.setCapArmure(10);
                 // code block
         }
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        JsonObjectRequest objectRequest= new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("Rest Response", response.toString());
+                        try {
+                            Log.e("Rest Response name", response.get("hit_die").toString());
+                            pvmax = Integer.parseInt(response.get("hit_die").toString());
+                            Log.e("Rest Response integer", String.valueOf(pvmax));
+                            FinAjoutPersonnage(unPersonnage,armeHero);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Rest Response", error.toString());
+
+                    }
+                }
+
+        );
+        requestQueue.add(objectRequest);
 
 
-        //a remplacer par une fonction qui demande à l'api rest (PVMax)
-        int pvmax = 8;
+    }
+    public void FinAjoutPersonnage(Personnage unPersonnage,ItemArme armeHero){
+        Log.e("Rest Response integer 2", String.valueOf(pvmax));
         unPersonnage.setPvMax(pvmax);
         unPersonnage.setPv(pvmax);
         BDDManager leBDDManager =new BDDManager();

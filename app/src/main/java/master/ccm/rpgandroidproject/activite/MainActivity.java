@@ -110,4 +110,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         startActivity(monIntent);
 
     }
+
+    public void onclicktestJson(View view) {
+        Intent monIntent = new Intent (this, testJson.class);
+        startActivity(monIntent);
+    }
 }
