@@ -18,7 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activite.testJson"></activity>
+        <activity android:name=".activite.GroupeViewActivity"></activity>
+        <activity android:name=".activite.combatBossActivity" />
+        <activity android:name=".activite.formCreateGroupeActivity" />
+        <activity android:name=".activite.listeGroupeActivity" />
+        <activity android:name=".activite.testJson" />
         <activity android:name=".activite.GameOver" />
         <activity android:name=".activite.Combat_activite" />
         <activity android:name=".activite.taverne_activite" />

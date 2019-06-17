@@ -119,6 +119,28 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
 
         }
     }
+    public void createRandomDonjon(int nbGenerate) {
+        for(int i = 1; i <= nbGenerate; i++)
+        {
+            float lat =getRandomNumberInRange(0,10);
+            lat=lat/10000;
+            int r =getRandomNumberInRange(0,1);
+            if(r == 0){
+                lat = -lat;
+            }
+            float lng =getRandomNumberInRange(0,10);
+            lng=lng/10000;
+            r =getRandomNumberInRange(0,1);
+            if(r == 0){
+                lng = -lng;
+            }
+            LatLng positionDonjon = new LatLng( StaticUtilisateurInfo.getInstance().getCoordonnes().getLatitude()+lat,StaticUtilisateurInfo.getInstance().getCoordonnes().getLongitude()+lng);
+            MarkerOptions Donjon =new MarkerOptions().position(positionDonjon).title("Donjon");
+            Donjon.icon(BitmapDescriptorFactory.fromResource(R.drawable.dongeon) );
+            listeDongeon.add(Donjon);
+
+        }
+    }
     public void MiseAJourCoordonnes() {
         mMap.clear();
 
@@ -164,7 +186,15 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
             //Toast.makeText(this,"Creation monstre",Toast.LENGTH_SHORT).show();
         }
         //Toast.makeText(this,"Il y a "+ listeMonstre.size()+" Monstre.",Toast.LENGTH_LONG).show();
+        nombreaCree = 0;
+        if(listeDongeon.size()<2){
 
+            nombreaCree = 2 - listeDongeon.size();
+            if(nombreaCree != 0) {
+                createRandomDonjon(nombreaCree);
+            }
+            //Toast.makeText(this,"Creation monstre",Toast.LENGTH_SHORT).show();
+        }
         reactualisationTavmons();
         mMap.addMarker(maPositionMarker);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(maPosition));
@@ -211,6 +241,10 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
             //Toast.makeText(this,"reactualisationTav Taverne.",Toast.LENGTH_LONG).show();
             mMap.addMarker(uneTaverne);
         }
+        for (MarkerOptions unDonjon : listeDongeon)
+        {
+              mMap.addMarker(unDonjon);
+        }
 
 
     }
@@ -226,7 +260,7 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
         Location maLoc = StaticUtilisateurInfo.getInstance().getCoordonnes();
         Location makerLoc = new Location(marker.getPosition().longitude,marker.getPosition().latitude);
         double DistanceMetre =maLoc.getDistanceWithOtherPosition(makerLoc);
-        if(DistanceMetre < 40 ){
+        if(DistanceMetre < 60 ){
             /*oolean contient =contientMarker(listeMonstre,marker);
             Toast.makeText(this, "j'ai cliker sur "+marker.getTitle() +" "+ contient,
                     Toast.LENGTH_SHORT).show();*/
@@ -247,6 +281,14 @@ public class maps_activite  extends FragmentActivity implements GoogleMap.OnInfo
 
                 Intent taverne = new Intent(this, taverne_activite.class);
                 startActivity(taverne);
+                //stopService(monServiceGeo);
+            }
+            if(contientMarker(listeDongeon,marker)){
+                Toast.makeText(this, "Vous entré dans unDonjon",
+                        Toast.LENGTH_SHORT).show();
+
+                Intent donjon = new Intent(this, listeGroupeActivity.class);
+                startActivity(donjon);
                 //stopService(monServiceGeo);
             }
 

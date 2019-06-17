@@ -28,4 +28,9 @@
     <string name="bt_attaquer">Attaquer</string>
     <string name="bt_Fuir">Fuir</string>
     <string name="bt_retour_MenuPrincipal">Retour au choix de personnages</string>
+    <string name="bt_retour">Return</string>
+    <string name="bt_LancerCombat" >Lanch fight</string>
+    <string name="name_group">name of group</string>
+    <string name="bt_createGroup">Create Group</string>
+    <string name="titre_Form_create_group">Formulaire de création de groupe</string>
 </resources>
