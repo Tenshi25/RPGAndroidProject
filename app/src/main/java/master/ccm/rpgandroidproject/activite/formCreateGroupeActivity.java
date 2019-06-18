@@ -1,5 +1,6 @@
 package master.ccm.rpgandroidproject.activite;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,5 +33,7 @@ public class formCreateGroupeActivity extends AppCompatActivity {
     public void InsertSuccess(String id) {
         String idGroupe =id;
         Toast.makeText(this,"Le groupe à été ajouter ! ",Toast.LENGTH_LONG);
+        Intent listGroupeView = new Intent (this,GroupeViewActivity.class);
+        startActivity(listGroupeView);
     }
 }

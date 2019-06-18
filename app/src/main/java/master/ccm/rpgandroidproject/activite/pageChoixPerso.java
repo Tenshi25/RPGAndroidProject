@@ -57,7 +57,7 @@ public class pageChoixPerso extends AppCompatActivity {
         //tableauChaines =getResources().getStringArray(R.array.tableau_de_chaines);*/
 
         //adapter fais le lien entre la liste et le tableau de chaine
-        //ArrayAdapter<String> monArrayAdapter=new ArrayAdapter(this,R.layout.descripteur_de_ligne,R.id.tv_nom_perso,tableauChaines);
+        //ArrayAdapter<String> monArrayAdapter=new ArrayAdapter(this,R.layout.decripteur_Groupes,R.id.tv_nom_perso,tableauChaines);
         //maListPersonnage.setAdapter(monArrayAdapter);
         maListPersonnage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

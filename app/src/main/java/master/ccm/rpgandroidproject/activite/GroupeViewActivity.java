@@ -23,4 +23,7 @@ public class GroupeViewActivity extends AppCompatActivity {
     public void onClickRetour(View view) {
         finish();
     }
+
+    public void UpdateSucess() {
+    }
 }
