@@ -165,7 +165,7 @@ public class BDDManager {
         });
     }}
         public void selectAllPersonnage(final pageChoixPerso context){
-            database.collection("Personnage").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            database.collection("Personnage").whereEqualTo("idUtilisateur",StaticUtilisateurInfo.getInstance().getId()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful()) {

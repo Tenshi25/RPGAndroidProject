@@ -30,9 +30,9 @@
                 android:textSize="18sp" />
 
             <ListView
-                android:id="@+id/Liste_joueurs_groupe"
+                android:id="@+id/liste_personnage_groupe"
                 android:layout_width="match_parent"
-                android:layout_height="520dp" />
+                android:layout_height="420dp" />
 
             <Button
                 android:id="@+id/bt_LancerCombat"
@@ -45,7 +45,7 @@
                 tools:layout_editor_absoluteY="543dp" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/bt_retour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

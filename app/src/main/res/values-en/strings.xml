@@ -34,4 +34,5 @@
     <string name="name_group">name of group</string>
     <string name="bt_createGroup">Create Group</string>
     <string name="titre_Form_create_group">Formulaire de création de groupe</string>
+    <string name="bt_Rejoindre">Join the team</string>
 </resources>

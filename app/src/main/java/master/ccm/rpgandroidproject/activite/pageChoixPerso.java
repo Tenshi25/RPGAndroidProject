@@ -40,6 +40,7 @@ public class pageChoixPerso extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_choix_perso);
+
         untextView = findViewById(R.id.tv_message);
         //StaticUtilisateurInfo unUtilisateurStatic = new StaticUtilisateurInfo();
         String chaineBienvenue ="bienvenue : "+StaticUtilisateurInfo.getInstance().getNom();
@@ -135,6 +136,7 @@ public class pageChoixPerso extends AppCompatActivity {
     }
 
     public void onClickModification(View view) {
+
         View parentRow = (View) view.getParent();
         ListView listView = (ListView) parentRow.getParent();
         final int position = listView.getPositionForView(parentRow);
