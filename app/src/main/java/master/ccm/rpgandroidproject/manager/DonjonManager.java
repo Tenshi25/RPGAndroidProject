@@ -23,10 +23,12 @@ import java.util.Map;
 import master.ccm.rpgandroidproject.Entity.Groupe;
 import master.ccm.rpgandroidproject.Entity.Personnage;
 import master.ccm.rpgandroidproject.Entity.PersonnageGroupe;
+import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
 import master.ccm.rpgandroidproject.Entity.Utilisateur;
 import master.ccm.rpgandroidproject.activite.GroupeViewActivity;
 import master.ccm.rpgandroidproject.activite.formCreateGroupeActivity;
 import master.ccm.rpgandroidproject.activite.listeGroupeActivity;
+import master.ccm.rpgandroidproject.activite.pageChoixPerso;
 
 public class DonjonManager {
     private static FirebaseFirestore database = FirebaseFirestore.getInstance();
@@ -99,7 +101,32 @@ public class DonjonManager {
             SupprGroups(groupe);
         }
     }
+    public void selectGroupById(final GroupeViewActivity context, final Groupe unGroupe){
+        database.collection("Groupe").whereEqualTo("idGroupe", unGroupe.getId()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    //if (!task.getResult().isEmpty()) {
 
+
+                    ArrayList<Groupe> listGroupe = new ArrayList<Groupe>();
+                    List<DocumentSnapshot> result = task.getResult().getDocuments();
+                    for (DocumentSnapshot document : result) {
+                        Groupe unGroupe = new Groupe(document.getId(),document.get("nomGroupe").toString(),Integer.parseInt(document.get("nbPersonnage").toString()));
+                        unGroupe.setId(document.getId());
+
+
+                        listGroupe.add(unGroupe);
+
+
+                    }
+                    context.selectGroupById(unGroupe);
+                } else {
+                    Log.w("selectAll", "Error getting documents.", task.getException());
+                }
+            }
+        });
+    }
     public void selectAllGroups(final listeGroupeActivity context){
         database.collection("Groupe").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

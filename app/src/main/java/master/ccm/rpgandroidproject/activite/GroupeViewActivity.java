@@ -58,6 +58,7 @@ public class GroupeViewActivity extends AppCompatActivity {
     }
 
     public void onClickRetour(View view) {
+        selectGroupById(leGroupe);
         Log.i("leGroupe","groupe : "+ leGroupe.getId() +" / "+leGroupe.getNomGroupe() +" / "+leGroupe.getNbPerso());
         DM.UpdateNbPerso(this,leGroupe,-1);
         DM.SupprPersonnageGroups(StaticUtilisateurInfo.getInstance().getPersonnageCourant(),leGroupe.getId());
@@ -108,5 +109,9 @@ public class GroupeViewActivity extends AppCompatActivity {
     }
 
     public void InsertSuccess(String id) {
+    }
+
+    public void selectGroupById(Groupe unGroupe) {
+        leGroupe =unGroupe;
     }
 }
