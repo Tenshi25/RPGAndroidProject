@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/plaine"
+    tools:context=".activite.Combat_activite">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteY="635dp">
+
+            <Button
+                android:id="@+id/bt_Attaquer"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/fui_idp_button_background_email"
+                android:onClick="onClickAttaquer"
+                android:text="@string/bt_attaquer"
+                android:textColor="@color/browser_actions_bg_grey"
+                tools:layout_editor_absoluteX="122dp"
+                tools:layout_editor_absoluteY="588dp" />
+
+            <Button
+                android:id="@+id/bt_Fuir"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/fui_idp_button_background_email"
+                android:onClick="onClickFuir"
+                android:text="@string/bt_Fuir"
+                android:textColor="@color/browser_actions_bg_grey"
+                tools:layout_editor_absoluteX="108dp"
+                tools:layout_editor_absoluteY="656dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_pv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/fui_idp_button_background_email"
+                android:textColor="@color/browser_actions_bg_grey"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageMonstre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="258dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bt_modif_perso"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_nom_perso"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="TextView de gauche"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/tv_niv_perso"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="TextView de droite" />
+
+    <Button
+        android:id="@+id/bt_jouer"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_weight="1"
+        android:background="@drawable/fui_idp_button_background_email"
+        android:onClick="onclickJouer"
+        android:text="Jouer"
+        android:textColor="@color/browser_actions_bg_grey"
+        app:layout_constraintBottom_toTopOf="@+id/bt_Deconnect" />
+
+    <ImageButton
+        android:id="@+id/bt_modifPerso"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="onClickModification"
+        app:srcCompat="@android:drawable/ic_menu_preferences" />
+
+    <ImageButton
+        android:id="@+id/bt_supprPerso"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="onClickSupprimer"
+        app:srcCompat="@android:drawable/btn_dialog" />
+
+</LinearLayout>

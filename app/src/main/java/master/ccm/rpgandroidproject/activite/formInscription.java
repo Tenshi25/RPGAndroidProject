@@ -13,7 +13,7 @@ import master.ccm.rpgandroidproject.Entity.Utilisateur;
 import master.ccm.rpgandroidproject.R;
 import master.ccm.rpgandroidproject.manager.BDDManager;
 
-public class Inscription extends AppCompatActivity {
+public class formInscription extends AppCompatActivity {
     //private EditText champNom,champPassword,champPasswordVerif;
     private EditText champNom;
     private EditText champPassword;
@@ -47,6 +47,7 @@ public class Inscription extends AppCompatActivity {
         StaticUtilisateurInfo.getInstance().setNom(NomUtilisateur);
         Intent monIntent = new Intent (this, MainActivity.class);
         startActivity(monIntent);
+        finish();
 
 
     }
@@ -66,6 +67,7 @@ public class Inscription extends AppCompatActivity {
     public void onClickBouttonConnexion(View view) {
         Intent monIntent = new Intent (this, MainActivity.class);
         startActivity(monIntent);
+        finish();
     }
 
     public void onClickBouttonInscription(View view) {

@@ -45,8 +45,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     public void onClickButtonInscription(View view) {
-        Intent monIntent = new Intent (this, Inscription.class);
+        Intent monIntent = new Intent (this, formInscription.class);
         startActivity(monIntent);
+
     }
     public void onClickBouttonConnection(View view) {
             Log.i("Tenshi", "Mdp ok !");
@@ -64,13 +65,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         StaticUtilisateurInfo.getInstance().setId(idUtilisateur);
         StaticUtilisateurInfo.getInstance().setNom(nomUtilisateur);
         Log.i("setInfo", StaticUtilisateurInfo.getInstance().getId());
-        Intent monIntent = new Intent (this, pageAccueil.class);
+        Intent monIntent = new Intent (this, pageChoixPerso.class);
         startActivity(monIntent);
+
     }
     public void onClickGoogleOAuth(View view) {
         Intent sign = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         Toast.makeText(this,"Debut connexion OAuth",Toast.LENGTH_SHORT).show();
         startActivityForResult(sign, 9025);
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -84,11 +87,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 Log.i("Login", acct.getDisplayName());
                 StaticUtilisateurInfo.getInstance().setId(acct.getId());
                 StaticUtilisateurInfo.getInstance().setNom(acct.getDisplayName());
-                Inscription inscription = new Inscription();
+                formInscription inscription = new formInscription();
                 inscription.InsertSuccessOAuth(acct.getDisplayName());
                 //acct.getFamilyName();
-                Intent monIntent = new Intent (this, pageAccueil.class);
+                Intent monIntent = new Intent (this, pageChoixPerso.class);
                 startActivity(monIntent);
+
             }
         }
     }
@@ -101,4 +105,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
 
+    public void onclicktest(View view) {
+        Intent monIntent = new Intent (this, testListView.class);
+        startActivity(monIntent);
+
+    }
+
+    public void onclicktestJson(View view) {
+        Intent monIntent = new Intent (this, testJson.class);
+        startActivity(monIntent);
+    }
 }

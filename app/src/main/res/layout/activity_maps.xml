@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activite.maps_activite">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/backgroud_parchemin"
+        android:orientation="vertical"
+        map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="parent">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            tools:context=".activite.maps_activite"
+            tools:layout_editor_absoluteX="203dp"
+            tools:layout_editor_absoluteY="78dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            map:layout_constraintBottom_toTopOf="@+id/map">
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/button_menu"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/fui_bgEmail"
+                    android:onClick="onClickMenu"
+                    android:text="Menu principale"
+                    android:textAlignment="center"
+                    android:textColor="@color/browser_actions_bg_grey"
+                    map:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                    tools:layout_editor_absoluteX="16dp" />
+
+                <Button
+                    android:id="@+id/Recentrer"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/fui_bgEmail"
+                    android:onClick="onClickRecenter"
+                    android:text="Recentré"
+                    android:textAlignment="center"
+                    android:textColor="@color/browser_actions_bg_grey"
+                    map:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                    tools:layout_editor_absoluteX="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_nomPerso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/fui_bgEmail"
+                    android:textSize="18sp"
+                    tools:layout_editor_absoluteX="206dp"
+                    tools:layout_editor_absoluteY="706dp" />
+
+                <TextView
+                    android:id="@+id/tv_pv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/fui_bgEmail"
+                    android:textSize="18sp"
+                    tools:layout_editor_absoluteX="206dp"
+                    tools:layout_editor_absoluteY="706dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

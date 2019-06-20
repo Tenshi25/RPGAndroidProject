@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activite.formAjoutPersonnage"
+    android:orientation="vertical" android:background="@drawable/backgroud_parchemin">
+
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_titre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Titre_AjoutPersonnage"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="24sp"
+                tools:layout_editor_absoluteX="125dp"
+                tools:layout_editor_absoluteY="39dp" />
+
+            <EditText
+                android:id="@+id/tb_nom_perso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/Lastname"
+                android:inputType="textPersonName"
+                android:textColor="@color/browser_actions_text_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.368"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="131dp" />
+
+            <EditText
+                android:id="@+id/tb_prenom_perso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/name"
+                android:inputType="textPersonName"
+                android:textColor="@color/browser_actions_text_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.368"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="227dp" />
+
+            <Spinner
+                android:id="@+id/id_listeClasse"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:dropDownWidth="match_parent"
+                android:entries="@array/liste_de_classe"
+                android:popupBackground="@drawable/fui_idp_button_background_google"
+                android:spinnerMode="dropdown"
+                app:layout_constraintBottom_toTopOf="@+id/bt_ajouter"
+                tools:layout_editor_absoluteX="96dp" />
+
+            <Button
+                android:id="@+id/bt_ajouter"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/fui_idp_button_background_email"
+                android:onClick="onClickCreerPersonnage"
+                android:text="@string/bt_ajout_personnage"
+                android:textColor="@color/browser_actions_bg_grey"
+                app:layout_constraintBottom_toTopOf="@+id/bt_retour"
+                tools:layout_editor_absoluteX="96dp" />
+
+            <Button
+                android:id="@+id/bt_retour"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/fui_idp_button_background_email"
+                android:onClick="onClickRetour"
+                android:text="@string/previous"
+                android:textColor="@color/browser_actions_bg_grey"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="530dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
