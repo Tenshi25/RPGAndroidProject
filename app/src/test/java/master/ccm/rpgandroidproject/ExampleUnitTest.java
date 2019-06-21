@@ -1,13 +1,29 @@
 package master.ccm.rpgandroidproject;
 
 import android.app.Activity;
+import android.content.Context;
+import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Random;
 
+import master.ccm.rpgandroidproject.Entity.Classdd;
+import master.ccm.rpgandroidproject.Entity.CombatCore;
+import master.ccm.rpgandroidproject.Entity.EtreVivant;
 import master.ccm.rpgandroidproject.Entity.Personnage;
 import master.ccm.rpgandroidproject.Entity.StaticUtilisateurInfo;
+import master.ccm.rpgandroidproject.activite.Combat_activite;
 import master.ccm.rpgandroidproject.activite.taverne_activite;
 
 import static org.junit.Assert.*;
@@ -150,6 +166,23 @@ public class ExampleUnitTest {
 
 
     }
+    @Test
+    public void testCombatCoreSum() throws Exception {
+
+
+        EtreVivant hero = new EtreVivant();
+        CombatCore CC = new CombatCore();
+        hero.setNom("Yugi");
+        CC.ajouterCombattant(hero);
+        EtreVivant mechant = new EtreVivant();
+        mechant.setNom("Kaiba");
+        CC.ajouterCombattant(mechant);
+        assertEquals("TestNombreCombatant", 2, CC.countCombatant());
+
+
+    }
+
+
     /*
     @Test
     public void testGetRandom() throws Exception {
