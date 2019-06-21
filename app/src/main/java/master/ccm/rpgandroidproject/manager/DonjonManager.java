@@ -173,8 +173,8 @@ public class DonjonManager {
 
         //InsertDatastorePersonnage(unUtilisateur,unPersonnage,context);
     }
-    public void selectAllPersoGroups(final GroupeViewActivity context){
-        database.collection("GroupePersonnage").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    public void selectAllPersoGroups(Groupe unGroupe,final GroupeViewActivity context){
+        database.collection("GroupePersonnage").whereEqualTo("idGroupe",unGroupe.getId()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
