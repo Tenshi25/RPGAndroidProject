@@ -27,7 +27,7 @@ public class CombatCore {
     }
     public void TurnOrderNext()
     {
-        setTurnOrder(getSumPersonnage()+1);
+        setTurnOrder(getSumPersonnage()+1/countCombatant());
     }
     public void ajouterCombattant (EtreVivant unEtre){
         this.listeCombattant.add(unEtre);
