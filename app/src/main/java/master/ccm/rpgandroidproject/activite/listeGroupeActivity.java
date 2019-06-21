@@ -74,7 +74,6 @@ public class listeGroupeActivity extends AppCompatActivity {
         groupViewActivity.putExtra("nomGroupe",GroupeAModif.getNomGroupe());
 
         startActivity(groupViewActivity);
-        finish();
 
 
     }

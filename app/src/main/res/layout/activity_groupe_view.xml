@@ -35,14 +35,14 @@
                 android:layout_height="420dp" />
 
             <Button
-                android:id="@+id/bt_actualiser"
+                android:id="@+id/bt_LancerCombat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/fui_idp_button_background_email"
-                android:onClick="onClickActualiser"
-                android:text="@string/bt_Actualiser"
+                android:onClick="onClickCommencerCombat"
+                android:text="@string/bt_LancerCombat"
                 android:textColor="@color/browser_actions_bg_grey"
-                tools:layout_editor_absoluteY="480dp" />
+                tools:layout_editor_absoluteY="543dp" />
 
             <Button
                 android:id="@+id/bt_retour"
@@ -54,17 +54,6 @@
                 android:text="@string/bt_retour"
                 android:textColor="@color/browser_actions_bg_grey"
                 app:layout_constraintTop_toBottomOf="@+id/bt_LancerCombat" />
-
-            <Button
-                android:id="@+id/bt_LancerCombat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/fui_idp_button_background_email"
-                android:onClick="onClickCommencerCombat"
-                android:text="@string/bt_LancerCombat"
-                android:textColor="@color/browser_actions_bg_grey"
-                app:layout_constraintTop_toBottomOf="@+id/bt_actualiser" />
 
         </LinearLayout>
     </ScrollView>
