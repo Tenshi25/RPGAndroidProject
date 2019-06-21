@@ -25,15 +25,11 @@ public class GroupeViewActivity extends AppCompatActivity {
     private List<PersonnageGroupe> listePersonnageGroupe;
     private DonjonManager DM= new DonjonManager();
     private  Groupe leGroupe;
-    private TextView TVnomDuGroupe;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groupe_view);
         Intent intent = getIntent();
-
-        TVnomDuGroupe =findViewById(R.id.tv_nomGroup);
 
         if (intent.hasExtra("idGroupe")){ // vérifie qu'une valeur est associée à la clé “edittext”
             String idGroupe = "";
@@ -47,14 +43,13 @@ public class GroupeViewActivity extends AppCompatActivity {
 
                     leGroupe = new Groupe(idGroupe, nomGroupe, nbPersoGroupe);
                     Log.i("leGroupe","groupe : "+ leGroupe.getId() +" / "+leGroupe.getNomGroupe() +" / "+leGroupe.getNbPerso());
-                    TVnomDuGroupe.setText(leGroupe.getNomGroupe());
                 }
             }
 
         }
         maListPersonnageGroupes = findViewById(R.id.liste_personnage_groupe);
 
-        DM.selectAllPersoGroups(leGroupe, this);
+        DM.selectAllPersoGroups(this);
     }
 
     public void onClickCommencerCombat(View view) {
@@ -63,12 +58,10 @@ public class GroupeViewActivity extends AppCompatActivity {
     }
 
     public void onClickRetour(View view) {
-        DM.selectGroupById(this,leGroupe);
+        selectGroupById(leGroupe);
         Log.i("leGroupe","groupe : "+ leGroupe.getId() +" / "+leGroupe.getNomGroupe() +" / "+leGroupe.getNbPerso());
-        DM.SupprPersonnageGroups(StaticUtilisateurInfo.getInstance().getPersonnageCourant(),leGroupe.getId());
         DM.UpdateNbPerso(this,leGroupe,-1);
-        Intent listGroupeActivity = new Intent (this,listeGroupeActivity.class);
-        startActivity(listGroupeActivity);
+        DM.SupprPersonnageGroups(StaticUtilisateurInfo.getInstance().getPersonnageCourant(),leGroupe.getId());
         finish();
     }
 
@@ -120,9 +113,5 @@ public class GroupeViewActivity extends AppCompatActivity {
 
     public void selectGroupById(Groupe unGroupe) {
         leGroupe =unGroupe;
-    }
-
-    public void onClickActualiser(View view) {
-        DM.selectAllPersoGroups(leGroupe,this);
     }
 }
