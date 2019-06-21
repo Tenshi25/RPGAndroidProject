@@ -36,7 +36,7 @@ public class page_inventaire extends AppCompatActivity {
         maListItem=findViewById(R.id.id_listViewItem);
 
         BDDManager unBDDManager =  new BDDManager();
-        Log.i("ApellSelectAllItem","coucou");
+        Log.i("ApellSelectAllItem","Voici votre inventaire");
         unBDDManager.selectAllItemInventaire(this, StaticUtilisateurInfo.getInstance().getPersonnageCourant());
         maListItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
